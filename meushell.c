@@ -6,26 +6,19 @@
 // USAREMOS /bin/ls /bin/pwd /bin/hostname 
 
 int main(){
-
-    printf("Configuring the shell...\n");
-    config_read();
-    printf("Done configuring!\n");
+    // Configure Shell
+    printf(ANSI_COLOR_GREEN "Configuring the shell...\n" ANSI_COLOR_RESET);
+    config();
+    printf(ANSI_COLOR_GREEN "Done configuring!\n" ANSI_COLOR_RESET);
     while(1){
         // reseta as variáveis
         reseta_variaveis(variaveis);
         // printa o PRONTO
-        printf("%s $ ",PRONTO);
+        printf(ANSI_COLOR_BLUE "%s $ " ANSI_COLOR_RESET, PRONTO);
         // recebe o input
         scanf(" %[^\n]", data);
         // parseia o input
-        char * token = strtok(data, " ");
-        loop = 0;
-        while(token != NULL){
-            variaveis[loop++] = token;
-            token = strtok (NULL, " ");
-        }
-        strcpy(path, "/bin/");
-        strcat(path, variaveis[0]);
+        parser();
         // executa o input
         if( fork() == 0 ) execl(path, variaveis[0], variaveis[1],variaveis[2], variaveis[3], variaveis[4],  NULL);
         wait(NULL);
