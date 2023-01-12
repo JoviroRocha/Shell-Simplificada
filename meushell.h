@@ -11,6 +11,6 @@ void config_read(){
         printf("ERROR: The file \".meushell.rec\" could not be found! \n");
         exit(0);
     }
-    fscanf(config_file, "HOST=%s PRONTO=%s SHELL=%s", HOST, PRONTO, SHELL);
+    fscanf(config_file, "HOST=\"%s PRONTO=\"%s SHELL=\"%s", HOST, PRONTO, SHELL);
     return;
 }
