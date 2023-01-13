@@ -7,14 +7,14 @@
 
 int main(){
     // Configure Shell
-    printf(ANSI_COLOR_GREEN "Configuring the shell...\n" ANSI_COLOR_RESET);
+    printf(COLOR_GREEN "Configuring the shell...\n" COLOR_RESET);
     config();
-    printf(ANSI_COLOR_GREEN "Done configuring!\n" ANSI_COLOR_RESET);
+    printf(COLOR_GREEN "Done configuring!\n" COLOR_RESET);
     while(1){
         // reseta as variáveis
         reseta_variaveis();
         // printa o PRONTO
-        printf(ANSI_COLOR_BLUE "%s $ " ANSI_COLOR_RESET, PRONTO);
+        printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
         // recebe o input
         scanf(" %[^\n]", data);
         // parseia o input
