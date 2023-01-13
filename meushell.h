@@ -13,7 +13,7 @@ char PRONTO[256];
 char SHELL[30];
 char data[100];
 char path[20];
-char *variaveis[5];
+char *variaveis[100];
 int loop;
 
 void config(){
@@ -38,19 +38,19 @@ void config(){
 
 void parser(){
     char * token = strtok(data, " ");
-    loop = 0;
+    loop = -1;
     while(token != NULL){
-        variaveis[loop++] = token;
+        variaveis[++loop]=malloc(sizeof(token) + 1);
+        strcpy(variaveis[loop], token);
         token = strtok (NULL, " ");
     }
+    // Adicionar isso a outra funcao específica
     strcpy(path, "/bin/");
     strcat(path, variaveis[0]);
 }
 
-void reseta_variaveis( char  *variaveis[] ){
-    variaveis[0] = NULL;
-    variaveis[1] = NULL;
-    variaveis[2] = NULL;
-    variaveis[3] = NULL;
-    variaveis[4] = NULL;
+void reseta_variaveis(){
+    for(int i = 0; i < sizeof(variaveis); i++){
+        variaveis[i] = NULL;
+    }
 }

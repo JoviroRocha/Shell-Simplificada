@@ -12,7 +12,7 @@ int main(){
     printf(ANSI_COLOR_GREEN "Done configuring!\n" ANSI_COLOR_RESET);
     while(1){
         // reseta as variáveis
-        reseta_variaveis(variaveis);
+        reseta_variaveis();
         // printa o PRONTO
         printf(ANSI_COLOR_BLUE "%s $ " ANSI_COLOR_RESET, PRONTO);
         // recebe o input
@@ -20,7 +20,7 @@ int main(){
         // parseia o input
         parser();
         // executa o input
-        if( fork() == 0 ) execl(path, variaveis[0], variaveis[1],variaveis[2], variaveis[3], variaveis[4],  NULL);
+        if( fork() == 0 ) execvp(path, variaveis);
         wait(NULL);
         
     };
