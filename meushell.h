@@ -49,7 +49,6 @@ int file_exists(const char *filename){
         return 1;
     }
     else{
-        fclose(arquivo);
         return 0;
     }
 }
