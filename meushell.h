@@ -99,9 +99,8 @@ void add_history(){
     printf("Loop: %i", loop);
     offset = loop % 100;
     printf("Ofset: %i", offset);    
-    loop++;
     printf("Loop 2: %i", (char)loop);
-    fputc((char)loop, history_file);
+   fprintf(history_file, "%d", loop++);
     fclose(history_file);
 }
 
