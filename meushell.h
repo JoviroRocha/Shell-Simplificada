@@ -70,12 +70,12 @@ void config(){
     }
     else{
         fclose(history_file);
-        FILE *history_file = fopen(".meushell.hst","w");
+        FILE *history_file = fopen(".meushell.hst","w+");
         if(!config_file){
             printf( COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
             exit(0);
         }
-        fprintf(history_file,"0");
+        fprintf(history_file, "0 ");
     }
 }
 
