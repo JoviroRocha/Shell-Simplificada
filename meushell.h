@@ -100,7 +100,7 @@ void parser(){
         token = strtok (NULL, " ");
     }
     // Adicionar isso a outra funcao específica
-    strcpy(path, "/bin/");
+    strcpy(path, "/usr/bin/");
     strcat(path, variables[0]);
 }
 
