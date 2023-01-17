@@ -10,7 +10,6 @@ int main(){
     printf(COLOR_GREEN "Configuring the shell...\n" COLOR_RESET);
     config();
     printf(COLOR_GREEN "Done configuring!\n" COLOR_RESET);
-    pthread_t id;
     while(1){
         // reseta as variáveis
         reset_variables();
@@ -20,9 +19,10 @@ int main(){
         scanf(" %[^\n]", data);
         strcpy(data_save,data);
         //save history
-        pthread_create(&id, NULL, add_history , NULL);
         // parseia o input
         parser();
+        //adiciona ao histórico
+        add_history();
         // executa o input
         if (strcmp(variables[0], "cd") == 0){
             cd();
@@ -35,7 +35,6 @@ int main(){
         } 
         else if (strcmp(variables[0],"exit") == 0){
             printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
-            pthread_join(id, NULL);
             return 0;
         }
         else {
