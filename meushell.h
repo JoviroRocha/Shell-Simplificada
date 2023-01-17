@@ -42,6 +42,17 @@ void clear(){
     printf("\033c");
 }
 
+int file_exists(const char *filename){
+    FILE *arquivo;
+    if(arquivo = fopen(filename, "r")){
+        fclose(arquivo);
+        return 1;
+    }
+    else{
+        fclose(arquivo);
+        return 0;
+    }
+}
 void config(){
     // Get Hostname
     gethostname(HOST, sizeof(HOST));
@@ -63,15 +74,14 @@ void config(){
     fprintf(config_file,"HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s\n",HOST,PRONTO,SHELL,DTA);
     fclose(config_file);
     // Write to the history file
-    FILE *history_file = fopen(".meushell.hst","a");
-    if(history_file != NULL){
-        fclose(history_file);
+    if( file_exists(".meushell.hst") == 1){
+
         return;
     }
     else{
-        fclose(history_file);
+
         FILE *history_file = fopen(".meushell.hst","w+");
-        if(!config_file){
+        if(!history_file){
             printf( COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
             exit(0);
         }
