@@ -101,7 +101,7 @@ void add_history(){
     printf("Ofset: %i", offset);
     loop = (loop + 1) % 100;    
     printf("Loop 2: %d", loop);
-    fprintf(history_file, "%d", loop);
+    fprintf(history_file, "%c", (char)loop);
     fclose(history_file);
 }
 
