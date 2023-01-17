@@ -101,7 +101,7 @@ void add_history(){
     loop++;
     printf("Loop 2: %i", (char)loop);
     rewind(history_file);
-    fputc((char)loop, history_file);
+    //fputc((char)loop, history_file);
     fclose(history_file);
 }
 
