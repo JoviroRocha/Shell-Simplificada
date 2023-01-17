@@ -17,7 +17,6 @@ char data[100];
 char data_save[100];
 char path[20];
 char *variables[0];
-int loop;
 char file_path[256];
 
 void get_current_directory(){
@@ -94,7 +93,7 @@ void* add_history(){
 
 void parser(){
     char * token = strtok(data, " ");
-    loop = -1;
+    int loop = -1;
     while(token != NULL){
         variables[++loop] = malloc(sizeof(token) + 1);
         strcpy(variables[loop], token);
