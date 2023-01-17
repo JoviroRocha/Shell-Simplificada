@@ -93,8 +93,11 @@ void config(){
 void add_history(){
     FILE *history_file = fopen(".meushell.hst", "r+");
     int loop;
+    int offset;
     loop = fscanf(history_file, "%d", &loop);
-    printf("%d", loop);
+    offset = loop % 100;
+    loop++;
+    fprintf(history_file, "%d", &loop);
     fclose(history_file);
 }
 
