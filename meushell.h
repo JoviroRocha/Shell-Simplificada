@@ -76,6 +76,7 @@ void config(){
             exit(0);
         }
         fprintf(history_file, "0 ");
+        fclose(history_file);
     }
 }
 
