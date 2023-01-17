@@ -84,7 +84,7 @@ void config(){
             printf( COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
             exit(0);
         }
-        fprintf(history_file, "1");
+        putw("1", history_file);
         fclose(history_file);
         return;
     }
