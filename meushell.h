@@ -55,7 +55,7 @@ void config(){
     // Get Shell name
     strcpy(SHELL,"Simplified Shell");
     // Write it to file
-    FILE *config_file = fopen(".meushel.rec","w+");
+    FILE *config_file = fopen(".meushell.rec","w+");
     if(!config_file){
         printf( COLOR_RED "ERROR: The file \".meushell.rec\" could not be found! \n" COLOR_RESET);
         exit(0);
