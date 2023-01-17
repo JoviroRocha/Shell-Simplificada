@@ -95,11 +95,11 @@ void add_history(){
     rewind(history_file);
     int loop;
     int offset;
-    loop = (int)fscanf(history_file, "%d", &loop);
+    loop = fscanf(history_file, "%d", &loop);
     printf("Loop: %i", loop);
     offset = loop % 100;
     printf("Ofset: %i", offset);    
-    printf("Loop 2: %i", (char)loop++);
+    printf("Loop 2: %d", loop++);
     fprintf(history_file, "%d", loop++);
     fclose(history_file);
 }
