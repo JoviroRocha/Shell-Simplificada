@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <pthread.h>
 
 #define COLOR_GREEN   "\x1b[32m"
 #define COLOR_RED     "\x1b[31m"
@@ -65,30 +64,6 @@ void config(){
 }
 
 void* add_history(){
-    char LINE[100];
-    char *result;
-    FILE *read = fopen(file_path, "r");
-    FILE *history_file = fopen(file_path, "a+");
-     if(!history_file){
-        printf( COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
-        exit(0);
-    }
-    //
-    fseek(read, -1, SEEK_END);
-
-    // Volta para o início da penúltima linha
-    while (fgetc(read) != '\n') {
-        fseek(read, -2, SEEK_CUR);
-    }
-
-    // Lê a penúltima linha
-    fgets(LINE, sizeof(LINE), read);
-
-    printf("Penúltima linha: %s", LINE);
-    //
-    fprintf(history_file, "1234 %s \n", data_save);
-    fclose(history_file);
-    pthread_exit(0);
 }
 
 void parser(){
