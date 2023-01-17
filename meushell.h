@@ -90,7 +90,11 @@ void config(){
     }
 }
 
-void* add_history(){
+void add_history(){
+    FILE *history_file = fopen(".meushell.hst", "r+");
+
+
+    fclose(history_file);
 }
 
 void parser(){
