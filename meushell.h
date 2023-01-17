@@ -94,7 +94,7 @@ void add_history(){
     FILE *history_file = fopen(".meushell.hst", "r+");
     int loop;
     int offset;
-    loop = fscanf(history_file, "%d", &loop);
+    loop = (int)fscanf(history_file, "%d", &loop);
     printf("Loop: %i", loop);
     offset = loop % 100;
     printf("Ofset: %i", offset);    
@@ -102,7 +102,6 @@ void add_history(){
     printf("Loop 2: %i", (char)loop);
     rewind(history_file);
     fputc((char)loop, history_file);
-    //fprintf(history_file, "%d\n", loop);
     fclose(history_file);
 }
 
