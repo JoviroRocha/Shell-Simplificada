@@ -100,8 +100,8 @@ void add_history(){
     printf("Ofset: %i", offset);    
     loop++;
     printf("Loop 2: %i", (char)loop);
-    rewind(history_file);
-    //fputc((char)loop, history_file);
+    //rewind(history_file);
+    fputc((char)loop, history_file);
     fclose(history_file);
 }
 
