@@ -48,9 +48,9 @@ int file_exists(const char *filename){
         fclose(arquivo);
         return 1;
     }
-    else{
-        return 0;
-    }
+    
+    return 0;
+    
 }
 void config(){
     // Get Hostname
