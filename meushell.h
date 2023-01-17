@@ -97,6 +97,7 @@ void add_history(){
     loop = fscanf(history_file, "%d", &loop);
     offset = loop % 100;
     loop++;
+    rewind();
     fprintf(history_file, "%d\n", loop);
     fclose(history_file);
 }
