@@ -84,7 +84,7 @@ void config(){
             printf( COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
             exit(0);
         }
-        fprintf(history_file, "1\n");
+        fprintf(history_file, "1");
         fclose(history_file);
         return;
     }
@@ -95,14 +95,14 @@ void add_history(){
     rewind(history_file);
     int loop;
     int offset;
-    loop = fscanf(history_file, "%d\n", &loop);
+    loop = getw(history_file); //fscanf(history_file, "%d\n", &loop);
     printf("Loop: %i", loop);
     offset = loop % 100;
     printf("Ofset: %i", offset);
     loop = (loop + 1) % 100;    
     printf("Loop 2: %d", loop);
     rewind(history_file);
-    fprintf(history_file, "%c\n", (char)loop);
+    putw(loop, history_file); //fprintf(history_file, "%c\n", (char)loop);
     fclose(history_file);
 }
 
