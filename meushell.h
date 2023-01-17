@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <pthread.h>
+#include <sys/wait.h>
 
 #define COLOR_GREEN "\x1b[32m"
 #define COLOR_RED "\x1b[31m"
@@ -10,15 +10,16 @@
 #define COLOR_RESET "\x1b[0m"
 
 char HOST[30];
-char PRONTO[256];
+char *PRONTO;
 char DTA[256];
 char SHELL[30];
 char data[100];
 char data_save[100];
 char path[20];
 char *variables[0];
-int loop;
 char file_path[256];
+
+int loop;
 char *variables_amb[20];
 char *var_amb_arq[20];
 char *result;
@@ -53,6 +54,17 @@ void clear()
     printf("\033c");
 }
 
+int file_exists(const char *filename)
+{
+    FILE *arquivo;
+    if (arquivo = fopen(filename, "r"))
+    {
+        fclose(arquivo);
+        return 1;
+    }
+
+    return 0;
+}
 void config()
 {
     // Get Hostname
@@ -63,11 +75,11 @@ void config()
     strcpy(file_path, DTA);
     strcat(file_path, "/.meushell.hst");
     // Sets PRONTO
-    strcpy(PRONTO, DTA);
+    PRONTO = DTA;
     // Get Shell name
     strcpy(SHELL, "Simplified Shell");
     // Write it to file
-    FILE *config_file = fopen(".meushel.rec", "w+");
+    FILE *config_file = fopen(".meushell.rec", "w+");
     if (!config_file)
     {
         printf(COLOR_RED "ERROR: The file \".meushell.rec\" could not be found! \n" COLOR_RESET);
@@ -75,6 +87,25 @@ void config()
     }
     fprintf(config_file, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s\n", HOST, PRONTO, SHELL, DTA);
     fclose(config_file);
+    // Write to the history file
+    if (file_exists(".meushell.hst") == 1)
+    {
+
+        return;
+    }
+    else
+    {
+
+        FILE *history_file = fopen(".meushell.hst", "w+");
+        if (!history_file)
+        {
+            printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
+            exit(0);
+        }
+        fprintf(history_file, "1");
+        fclose(history_file);
+        return;
+    }
 }
 
 void change_value();
@@ -320,40 +351,19 @@ void show_value()
     fclose(config_file);
 }
 
-void *add_history()
+void add_history()
 {
-    char LINE[100];
-    char *result;
-    FILE *read = fopen(file_path, "r");
-    FILE *history_file = fopen(file_path, "a+");
-    if (!history_file)
-    {
-        printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
-        exit(0);
-    }
-    //
-    fseek(read, -1, SEEK_END);
-
-    // Volta para o início da penúltima linha
-    while (fgetc(read) != '\n')
-    {
-        fseek(read, -2, SEEK_CUR);
-    }
-
-    // Lê a penúltima linha
-    fgets(LINE, sizeof(LINE), read);
-
-    printf("Penúltima linha: %s", LINE);
-    //
-    fprintf(history_file, "1234 %s \n", data_save);
+    FILE *history_file = fopen(".meushell.hst", "r+");
+    int loop;
+    loop = fscanf(history_file, "%d", &loop);
+    printf("%d", loop);
     fclose(history_file);
-    pthread_exit(0);
 }
 
 void parser()
 {
     char *token = strtok(data, " ");
-    loop = -1;
+    int loop = -1;
     while (token != NULL)
     {
         variables[++loop] = malloc(sizeof(token) + 1);
@@ -361,14 +371,13 @@ void parser()
         token = strtok(NULL, " ");
     }
     // Adicionar isso a outra funcao específica
-    strcpy(path, "/bin/");
+    strcpy(path, "/usr/bin/");
     strcat(path, variables[0]);
 }
 
 void reset_variables()
 {
-    int i;
-    for (i = 0; variables[i] != NULL; i++)
+    for (int i = 0; variables[i] != NULL; i++)
     {
         variables[i] = NULL;
     }
