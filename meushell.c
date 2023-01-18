@@ -41,6 +41,7 @@ int main(){
             int resp;
             // Executar o comando
            if( fork() == 0 ){
+            printf("%s", variables[1]);
                 resp = execvp(path, variables);
                 if(resp == -1) printf(COLOR_RED "ERROR: Command not found\n" COLOR_RESET);
                 exit(0);
