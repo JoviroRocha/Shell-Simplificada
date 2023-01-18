@@ -115,7 +115,7 @@ void escreve();
 
 void var_ambiente()
 {
-
+    printf("Iuiuiuiu\n");
     if (strstr(variables[1], "=") != NULL)
     {
         printf("OIOI\n");
