@@ -79,7 +79,7 @@ void config(){
     }
     else{
 
-        FILE *history_file = fopen(".meushell.hst","w+");
+        FILE *history_file = fopen(".meushell.txt","w+");
         if(!history_file){
             printf( COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
             exit(0);
@@ -91,7 +91,8 @@ void config(){
 }
 
 void add_history(){
-    FILE *history_file = fopen(".meushell.hst", "w+");
+
+    FILE *history_file = fopen(".meushell.txt", "w+");
     int loop;
     int offset;
     loop = getw(history_file); //fscanf(history_file, "%d\n", &loop);
