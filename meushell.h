@@ -111,15 +111,15 @@ void escreve()
         exit(0);
     }
     if (strstr(HOST, "\"") == NULL)
-        fprintf(config_file2, "HOST=\"%s\"PRONTO=%sSHELL=%sDTA=%s", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=\"%s\"\nPRONTO=%s\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
     else if (strstr(PRONTO, "\"") == NULL)
-        fprintf(config_file2, "HOST=%sPRONTO=\"%s\"SHELL=%sDTA=%s", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=\"%s\"\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
     else if (strstr(SHELL, "\"") == NULL)
-        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=\"%s\"DTA=%s", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=\"%s\"\nDTA=%s", HOST, PRONTO, SHELL, DTA);
     else if (strstr(DTA, "\"") == NULL)
-        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=%sDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
     else
-        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=%sDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
     fclose(config_file2);
 }
 
