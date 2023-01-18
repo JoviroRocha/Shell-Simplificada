@@ -98,7 +98,7 @@ void add_history(){
     int offset;
     char retorno[10];
     char s[10];
-    retorno = fscanf(history_file, "%s\n", &loop);
+    fscanf(history_file, "%s\n", retorno);
     itoa(loop,retorno,10);
     printf("Loop: %i\n", loop);
     offset = loop % 100;
