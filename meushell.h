@@ -137,6 +137,8 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
 
         token = strtok(NULL, "=");
     }
+    for(int p = 0; variables_amb[p] != NULL; p++)
+        printf("%s\n",variables_amb[p]);
     printf("IOOIOI2\n");
     FILE *config_file = fopen(".meushell.txt", "rt");
     if (!config_file)
