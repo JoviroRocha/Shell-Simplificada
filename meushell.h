@@ -115,22 +115,20 @@ void escreve();
 
 void var_ambiente()
 {
-    printf("Iuiuiuiu\n");
-    if (strstr(variables[1], "=") != NULL)
+
+    if(variables[1] == NULL){
+        printf(COLOR_RED "Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n" COLOR_RESET);
+        return;
+    }
+    else if (strstr(variables[1], "=") != NULL)
     {
-        printf("OIOI\n");
         // Atribui valor
         change_value();
     }
     else if (strstr(variables[1], "$") != NULL)
-    {
-        printf("OIOIoioi\n");
+    {;
         // Consulta valor
         show_value();
-    }
-    else
-    {
-        printf("Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n");
     }
 
 }
