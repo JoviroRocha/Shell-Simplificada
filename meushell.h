@@ -182,7 +182,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
         i++;
     }
     printf("IOOIOI4\n");
-    else if (strcmp(variables_amb[1], "HOST") == 0)
+    if (strcmp(variables_amb[1], "HOST") == 0)
     {
         if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
