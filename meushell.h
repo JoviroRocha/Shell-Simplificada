@@ -10,7 +10,8 @@
 #define COLOR_RESET "\x1b[0m"
 
 char HOST[30];
-char *PRONTO;
+char PRONTO[256];
+char PRONTO_NOVO[256] = NULL;
 char DTA[256];
 char SHELL[30];
 char data[100];
@@ -70,7 +71,7 @@ void config()
     strcpy(file_path, DTA);
     strcat(file_path, "/.meushell.hst");
     // Sets PRONTO
-    PRONTO = DTA;
+    strcpy(PRONTO, DTA);
     // Get Shell name
     strcpy(SHELL, "Simplified Shell");
     // Write it to file
