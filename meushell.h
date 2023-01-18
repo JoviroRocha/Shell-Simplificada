@@ -163,15 +163,15 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
             {
                 strcpy(HOST, var_amb_arq[1]);
             }
-            if (strcmp(var_amb_arq[0], "PRONTO") == 0)
+            else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
             {
                 strcpy(PRONTO, var_amb_arq[1]);
             }
-            if (strcmp(var_amb_arq[0], "SHELL") == 0)
+            else if (strcmp(var_amb_arq[0], "SHELL") == 0)
             {
                 strcpy(SHELL, var_amb_arq[1]);
             }
-            if (strcmp(var_amb_arq[0], "DTA") == 0)
+            else if (strcmp(var_amb_arq[0], "DTA") == 0)
             {
                 strcpy(DTA, var_amb_arq[1]);
             }
