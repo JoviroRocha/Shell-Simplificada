@@ -106,6 +106,7 @@ void add_history(){
     loop = (loop + 1) % 100;    
     printf("Loop 2: %d\n", loop);
     sprintf(s,"%d", loop);
+    rewind(history_file);
     fprintf(history_file, "%s\n", s);
     fclose(history_file);
 }
