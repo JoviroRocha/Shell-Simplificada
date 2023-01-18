@@ -126,8 +126,6 @@ void escreve()
 void change_value(char * var_amb_arq[], char * variables_amb[], char * variables[])
 {
     char *token = strtok(variables[1], "=");
-    char aux_amb[99];
-    strcpy(aux_amb, token);
     int loop = -1;
     printf("IOOIOI1\n");
     while (token != NULL)
@@ -166,19 +164,19 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
                 token2 = strtok(NULL, "=");
             }
 
-            if (strcmp(var_amb_arq[0], "HOST") == 0 && strcmp(var_amb_arq[0], aux_amb) != 0)
+            if (strcmp(var_amb_arq[0], "HOST") == 0)
             {
                 strcpy(HOST, var_amb_arq[1]);
             }
-            if (strcmp(var_amb_arq[0], "PRONTO") == 0 && strcmp(var_amb_arq[0], aux_amb) != 0)
+            if (strcmp(var_amb_arq[0], "PRONTO") == 0)
             {
                 strcpy(PRONTO, var_amb_arq[1]);
             }
-            if (strcmp(var_amb_arq[0], "SHELL") == 0 && strcmp(var_amb_arq[0], aux_amb) != 0)
+            if (strcmp(var_amb_arq[0], "SHELL") == 0)
             {
                 strcpy(SHELL, var_amb_arq[1]);
             }
-            if (strcmp(var_amb_arq[0], "DTA") == 0 && strcmp(var_amb_arq[0], aux_amb) != 0)
+            if (strcmp(var_amb_arq[0], "DTA") == 0)
             {
                 strcpy(DTA, var_amb_arq[1]);
             }
@@ -189,19 +187,19 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
     if(variables_amb[2] == NULL) printf("ERRRRROU\n");
     else if (strcmp(variables_amb[2], "HOST") == 0)
     {
-        if (strcmp(aux_amb, "HOST") == 0)
+        if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
             strcpy(HOST, HOST);
         }
-        else if (strcmp(aux_amb, "PRONTO") == 0)
+        else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
             strcpy(PRONTO, HOST);
         }
-        else if (strcmp(aux_amb, "SHELL") == 0)
+        else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
             strcpy(SHELL, HOST);
         }
-        else if (strcmp(aux_amb, "DTA") == 0)
+        else if (strcmp(var_amb_arq[0], "DTA") == 0)
         {
             strcpy(DTA, HOST);
         }
@@ -209,74 +207,74 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
     else if (strcmp(variables_amb[2], "PRONTO") == 0)
     {
 
-        if (strcmp(aux_amb, "HOST") == 0)
+        if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
             strcpy(HOST, PRONTO);
         }
-        else if (strcmp(aux_amb, "PRONTO") == 0)
+        else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
             strcpy(PRONTO, PRONTO);
         }
-        else if (strcmp(aux_amb, "SHELL") == 0)
+        else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
             strcpy(SHELL, PRONTO);
         }
-        else if (strcmp(aux_amb, "DTA") == 0)
+        else if (strcmp(var_amb_arq[0], "DTA") == 0)
         {
             strcpy(DTA, PRONTO);
         }
     }
     else if (strcmp(variables_amb[2], "SHELL") == 0)
     {
-        if (strcmp(aux_amb, "HOST") == 0)
+        if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
             strcpy(HOST, SHELL);
         }
-        else if (strcmp(aux_amb, "PRONTO") == 0)
+        else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
             strcpy(PRONTO, SHELL);
         }
-        else if (strcmp(aux_amb, "SHELL") == 0)
+        else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
             strcpy(SHELL, SHELL);
         }
-        else if (strcmp(aux_amb, "DTA") == 0)
+        else if (strcmp(var_amb_arq[0], "DTA") == 0)
         {
             strcpy(DTA, SHELL);
         }
     }
     else if (strcmp(variables_amb[2], "DTA") == 0)
     {
-        if (strcmp(aux_amb, "HOST") == 0)
+        if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
             strcpy(HOST, DTA);
         }
-        else if (strcmp(aux_amb, "PRONTO") == 0)
+        else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
             strcpy(PRONTO, DTA);
         }
-        else if (strcmp(aux_amb, "SHELL") == 0)
+        else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
             strcpy(SHELL, DTA);
         }
-        else if (strcmp(aux_amb, "DTA") == 0)
+        else if (strcmp(var_amb_arq[0], "DTA") == 0)
         {
             strcpy(DTA, DTA);
         }
     }
-    else if (strcmp(aux_amb, "HOST") == 0)
+    else if (strcmp(var_amb_arq[0], "HOST") == 0)
     {
         strcpy(HOST, variables_amb[2]);
     }
-    else if (strcmp(aux_amb, "PRONTO") == 0)
+    else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
     {
         strcpy(PRONTO, variables_amb[2]);
     }
-    else if (strcmp(aux_amb, "SHELL") == 0)
+    else if (strcmp(var_amb_arq[0], "SHELL") == 0)
     {
         strcpy(SHELL, variables_amb[2]);
     }
-    else if (strcmp(aux_amb, "DTA") == 0)
+    else if (strcmp(var_amb_arq[0], "DTA") == 0)
     {
         strcpy(DTA, variables_amb[2]);
     }
