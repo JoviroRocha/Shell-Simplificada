@@ -6,9 +6,9 @@
 // USAREMOS /bin/ls /bin/pwd /bin/hostname 
 
 int main(){
-    char *variables[0];
-    char *var_amb_arq[0];
-    char *variables_amb[0];
+    char *variables[1];
+    char *var_amb_arq[1];
+    char *variables_amb[1];
     // Configure Shell
     printf(COLOR_GREEN "Configuring the shell...\n" COLOR_RESET);
     config();
