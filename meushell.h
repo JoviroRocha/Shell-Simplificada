@@ -149,7 +149,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
     {
 
         // Lê uma linha (inclusive com o '\n')
-        result = fgets(Linha, 128, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
+        result = fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
 
         if (result)
         { // Se foi possível ler
@@ -294,7 +294,7 @@ void show_value(char *var_amb_arq[], char *variables[])
     while (!feof(config_file))
     {
         // Lê uma linha (inclusive com o '\n')
-        result = fgets(Linha, 128, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
+        result = fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
 
         if (result)
         { // Se foi possível ler
