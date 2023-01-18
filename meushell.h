@@ -138,7 +138,7 @@ void change_value()
     char *token = strtok(variables[1], "=");
     char aux_amb[10];
     strcpy(aux_amb, token);
-
+    int loop = -1;
     while (token != NULL)
     {
         variables_amb[++loop] = malloc(sizeof(token) + 1);
@@ -154,7 +154,7 @@ void change_value()
         exit(0);
     }
     int i = 1;
-    int loop = -1;
+    loop = -1;
     while (!feof(config_file))
     {
 
