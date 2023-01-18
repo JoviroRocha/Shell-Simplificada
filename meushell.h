@@ -182,8 +182,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
         i++;
     }
     printf("IOOIOI4\n");
-    if(variables_amb[2] == NULL) printf("ERRRRROU\n");
-    else if (strcmp(variables_amb[2], "HOST") == 0)
+    else if (strcmp(variables_amb[1], "HOST") == 0)
     {
         if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
@@ -202,7 +201,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
             strcpy(DTA, HOST);
         }
     }
-    else if (strcmp(variables_amb[2], "PRONTO") == 0)
+    else if (strcmp(variables_amb[1], "PRONTO") == 0)
     {
 
         if (strcmp(var_amb_arq[0], "HOST") == 0)
@@ -222,7 +221,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
             strcpy(DTA, PRONTO);
         }
     }
-    else if (strcmp(variables_amb[2], "SHELL") == 0)
+    else if (strcmp(variables_amb[1], "SHELL") == 0)
     {
         if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
@@ -241,7 +240,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
             strcpy(DTA, SHELL);
         }
     }
-    else if (strcmp(variables_amb[2], "DTA") == 0)
+    else if (strcmp(variables_amb[1], "DTA") == 0)
     {
         if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
@@ -262,19 +261,19 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
     }
     else if (strcmp(var_amb_arq[0], "HOST") == 0)
     {
-        strcpy(HOST, variables_amb[2]);
+        strcpy(HOST, variables_amb[1]);
     }
     else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
     {
-        strcpy(PRONTO, variables_amb[2]);
+        strcpy(PRONTO, variables_amb[1]);
     }
     else if (strcmp(var_amb_arq[0], "SHELL") == 0)
     {
-        strcpy(SHELL, variables_amb[2]);
+        strcpy(SHELL, variables_amb[1]);
     }
     else if (strcmp(var_amb_arq[0], "DTA") == 0)
     {
-        strcpy(DTA, variables_amb[2]);
+        strcpy(DTA, variables_amb[1]);
     }
     printf("IOOIOI5\n");
     fclose(config_file);
