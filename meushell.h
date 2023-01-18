@@ -16,7 +16,6 @@ char SHELL[30];
 char data[100];
 char data_save[100];
 char path[20];
-char *variables[0];
 char file_path[256];
 
 void get_current_directory(){
@@ -26,7 +25,7 @@ void get_current_directory(){
     }
 }
 
-void cd(){
+void cd(char *variables[]){
     if(variables[2]){
         printf(COLOR_RED "ERROR: Too many arguments for cd\n" COLOR_RESET);
         return;
@@ -111,7 +110,7 @@ void add_history(){
     fclose(history_file);
 }
 
-void parser(){
+void parser(char *variables[]){
     char * token = strtok(data, " ");
     int loop = -1;
     while(token != NULL){
@@ -124,7 +123,7 @@ void parser(){
     strcat(path, variables[0]);
 }
 
-void reset_variables(){
+void reset_variables(char *variables[]){
     for(int i = 0; variables[i] != NULL; i++){
         variables[i] = NULL;
     }
