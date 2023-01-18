@@ -126,7 +126,7 @@ void escreve()
 void change_value(char * var_amb_arq[], char * variables_amb[], char * variables[])
 {
     char *token = strtok(variables[1], "=");
-    char aux_amb[10];
+    char aux_amb[99];
     strcpy(aux_amb, token);
     int loop = -1;
     while (token != NULL)
