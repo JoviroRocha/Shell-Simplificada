@@ -6,13 +6,14 @@
 // USAREMOS /bin/ls /bin/pwd /bin/hostname 
 
 int main(){
+    char *variables[0];
     // Configure Shell
     printf(COLOR_GREEN "Configuring the shell...\n" COLOR_RESET);
     config();
     printf(COLOR_GREEN "Done configuring!\n" COLOR_RESET);
     while(1){
         // reseta as variáveis
-        reset_variables();
+        reset_variables(variables);
         // printa o PRONTO
         printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
         // recebe o input
@@ -20,12 +21,12 @@ int main(){
         strcpy(data_save,data);
         //save history
         // parseia o input
-        parser();
+        parser(variables);
         //adiciona ao histórico
         add_history();
         // executa o input
         if (strcmp(variables[0], "cd") == 0){
-            cd();
+            cd(variables);
         }
         else if(strcmp(variables[0],"amb") == 0){
             var_ambiente();
