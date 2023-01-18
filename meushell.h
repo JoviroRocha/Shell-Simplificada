@@ -118,11 +118,13 @@ void var_ambiente()
 
     if (strstr(variables[1], "=") != NULL)
     {
+        printf("OIOI");
         // Atribui valor
         change_value();
     }
     else if (strstr(variables[1], "$") != NULL)
     {
+        printf("OIOIoioi");
         // Consulta valor
         show_value();
     }
