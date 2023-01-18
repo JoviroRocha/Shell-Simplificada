@@ -353,11 +353,7 @@ void show_value()
 
 void add_history()
 {
-    FILE *history_file = fopen(".meushell.hst", "r+");
-    int loop;
-    loop = fscanf(history_file, "%d", &loop);
-    printf("%d", loop);
-    fclose(history_file);
+
 }
 
 void parser()
