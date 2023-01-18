@@ -79,10 +79,10 @@ void config()
     // Get Shell name
     strcpy(SHELL, "Simplified Shell");
     // Write it to file
-    FILE *config_file = fopen(".meushell.rec", "w+");
+    FILE *config_file = fopen(".meushell.txt", "w+");
     if (!config_file)
     {
-        printf(COLOR_RED "ERROR: The file \".meushell.rec\" could not be found! \n" COLOR_RESET);
+        printf(COLOR_RED "ERROR: The file \".meushell.txt\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
     fprintf(config_file, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s\n", HOST, PRONTO, SHELL, DTA);
@@ -147,10 +147,10 @@ void change_value()
         token = strtok(NULL, "=");
     }
 
-    FILE *config_file = fopen(".meushel.txt", "rt");
+    FILE *config_file = fopen(".meushell.txt", "rt");
     if (!config_file)
     {
-        printf("ERROR: The file \".meushel.txt\" could not be found! \n");
+        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
         exit(0);
     }
     int i = 1;
@@ -290,10 +290,10 @@ void change_value()
 
 void escreve()
 {
-    FILE *config_file2 = fopen("meushel.txt", "w+");
+    FILE *config_file2 = fopen("meushell.txt", "w+");
     if (!config_file2)
     {
-        printf("ERROR: The file \".meushel.txt\" could not be found! \n");
+        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
         exit(0);
     }
     if (strstr(HOST, "\"") == NULL)
@@ -314,10 +314,10 @@ void show_value()
     char *token = strtok(variables[1], "$");
     char aux_amb[10];
     strcpy(aux_amb, token);
-    FILE *config_file = fopen(".meushel.txt", "rt");
+    FILE *config_file = fopen(".meushell.txt", "rt");
     if (!config_file)
     {
-        printf("ERROR: The file \".meushel.txt\" could not be found! \n");
+        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
         exit(0);
     }
     int i = 1;
