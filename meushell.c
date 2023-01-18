@@ -39,7 +39,6 @@ int main(){
         }
         else {
             int resp;
-            printf("%s\n", variables[1]);
             // Executar o comando
            if( fork() == 0 ){
                 resp = execvp(path, variables);
