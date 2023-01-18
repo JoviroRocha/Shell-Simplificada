@@ -95,7 +95,6 @@ void config()
     }
     else
     {
-
         FILE *history_file = fopen(".meushell.hst", "w+");
         if (!history_file)
         {
@@ -131,6 +130,7 @@ void var_ambiente()
     {
         printf("Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n");
     }
+
 }
 
 void change_value()
