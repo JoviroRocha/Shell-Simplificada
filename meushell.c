@@ -33,7 +33,7 @@ int main(){
             cd(variables);
         }
         else if(strcmp(variables[0],"amb") == 0){
-            var_ambiente(var_amb_arq, variables_amb);
+            var_ambiente(variables, var_amb_arq, variables_amb);
         }
         else if (strcmp(variables[0],"clear") == 0){
             clear();

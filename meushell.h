@@ -123,7 +123,7 @@ void escreve()
     fclose(config_file2);
 }
 
-void change_value(char * var_amb_arq[], char * variables_amb[])
+void change_value(char * var_amb_arq[], char * variables_amb[], char * variables[])
 {
     char *token = strtok(variables[1], "=");
     char aux_amb[10];
@@ -278,7 +278,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[])
     escreve();
 }
 
-void show_value(char *var_amb_arq[])
+void show_value(char *var_amb_arq[], char *variables[])
 {
     char *token = strtok(variables[1], "$");
     char aux_amb[10];
@@ -330,12 +330,12 @@ void var_ambiente(char *variables[], char *var_amb_arq[], char * variables_amb[]
     else if (strstr(variables[1], "=") != NULL)
     {
         // Atribui valor
-        change_value(var_amb_arq, variables_amb);
+        change_value(var_amb_arq, variables_amb, variables);
     }
     else if (strstr(variables[1], "$") != NULL)
     {;
         // Consulta valor
-        show_value(var_amb_arq);
+        show_value(var_amb_arq, variables);
     }
 
 }
