@@ -7,6 +7,8 @@
 
 int main(){
     char *variables[0];
+    char *var_amb_arq[0];
+    char *variables_amb[0];
     // Configure Shell
     printf(COLOR_GREEN "Configuring the shell...\n" COLOR_RESET);
     config();
@@ -14,6 +16,8 @@ int main(){
     while(1){
         // reseta as variáveis
         reset_variables(variables);
+        reset_variables(var_amb_arq);
+        reset_variables(variables_amb);
         // printa o PRONTO
         printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
         // recebe o input
@@ -29,7 +33,7 @@ int main(){
             cd(variables);
         }
         else if(strcmp(variables[0],"amb") == 0){
-            var_ambiente();
+            var_ambiente(var_amb_arq, variables_amb);
         }
         else if (strcmp(variables[0],"clear") == 0){
             clear();
