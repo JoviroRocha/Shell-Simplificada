@@ -11,7 +11,7 @@
 
 char HOST[30];
 char PRONTO[256];
-char PRONTO_NOVO[256] = NULL;
+char PRONTO_NOVO[256];
 char DTA[256];
 char SHELL[30];
 char data[100];
