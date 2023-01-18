@@ -93,7 +93,7 @@ void config(){
 void add_history(){
 
     FILE *history_file = fopen(".meushell.txt", "a+");
-    rewind();
+    rewind(history_file);
     int loop;
     int offset;
     loop = getw(history_file); //fscanf(history_file, "%d\n", &loop);
