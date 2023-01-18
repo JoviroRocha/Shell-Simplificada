@@ -104,7 +104,7 @@ void config()
 
 void escreve()
 {
-    FILE *config_file2 = fopen("meushell.txt", "w+");
+    FILE *config_file2 = fopen(".meushell.txt", "w+");
     if (!config_file2)
     {
         printf("ERROR: The file \".meushell.txt\" could not be found! \n");
@@ -127,7 +127,6 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
 {
     char *token = strtok(variables[1], "=");
     int loop = -1;
-    printf("IOOIOI1\n");
     while (token != NULL)
     {
         variables_amb[++loop] = malloc(sizeof(token) + 1);
@@ -135,14 +134,12 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
 
         token = strtok(NULL, "=");
     }
-    printf("IOOIOI2\n");
     FILE *config_file = fopen(".meushell.txt", "rt");
     if (!config_file)
     {
         printf("ERROR: The file \".meushell.txt\" could not be found! \n");
         exit(0);
     }
-    printf("IOOIOI3\n");
     int i = 1;
     loop = -1;
     while (!feof(config_file))
@@ -181,7 +178,6 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
         }
         i++;
     }
-    printf("IOOIOI4\n");
     if (strcmp(variables_amb[1], "HOST") == 0)
     {
         if (strcmp(var_amb_arq[0], "HOST") == 0)
