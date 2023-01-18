@@ -20,8 +20,8 @@ char *variables[0];
 char file_path[256];
 
 int loop;
-char *variables_amb[20];
-char *var_amb_arq[20];
+char *variables_amb[0];
+char *var_amb_arq[0];
 char *result;
 char Linha[100];
 
@@ -65,6 +65,7 @@ int file_exists(const char *filename)
 
     return 0;
 }
+
 void config()
 {
     // Get Hostname
@@ -107,30 +108,25 @@ void config()
     }
 }
 
-void change_value();
-
-void show_value();
-
-void escreve();
-
-void var_ambiente()
+void escreve()
 {
-
-    if(variables[1] == NULL){
-        printf(COLOR_RED "Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n" COLOR_RESET);
-        return;
-    }
-    else if (strstr(variables[1], "=") != NULL)
+    FILE *config_file2 = fopen("meushell.txt", "w+");
+    if (!config_file2)
     {
-        // Atribui valor
-        change_value();
+        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        exit(0);
     }
-    else if (strstr(variables[1], "$") != NULL)
-    {;
-        // Consulta valor
-        show_value();
-    }
-
+    if (strstr(HOST, "\"") == NULL)
+        fprintf(config_file2, "HOST=\"%s\"PRONTO=%sSHELL=%sDTA=%s", HOST, PRONTO, SHELL, DTA);
+    else if (strstr(PRONTO, "\"") == NULL)
+        fprintf(config_file2, "HOST=%sPRONTO=\"%s\"SHELL=%sDTA=%s", HOST, PRONTO, SHELL, DTA);
+    else if (strstr(SHELL, "\"") == NULL)
+        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=\"%s\"DTA=%s", HOST, PRONTO, SHELL, DTA);
+    else if (strstr(DTA, "\"") == NULL)
+        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=%sDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
+    else
+        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=%sDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
+    fclose(config_file2);
 }
 
 void change_value()
@@ -288,27 +284,6 @@ void change_value()
     escreve();
 }
 
-void escreve()
-{
-    FILE *config_file2 = fopen("meushell.txt", "w+");
-    if (!config_file2)
-    {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
-        exit(0);
-    }
-    if (strstr(HOST, "\"") == NULL)
-        fprintf(config_file2, "HOST=\"%s\"PRONTO=%sSHELL=%sDTA=%s", HOST, PRONTO, SHELL, DTA);
-    else if (strstr(PRONTO, "\"") == NULL)
-        fprintf(config_file2, "HOST=%sPRONTO=\"%s\"SHELL=%sDTA=%s", HOST, PRONTO, SHELL, DTA);
-    else if (strstr(SHELL, "\"") == NULL)
-        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=\"%s\"DTA=%s", HOST, PRONTO, SHELL, DTA);
-    else if (strstr(DTA, "\"") == NULL)
-        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=%sDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
-    else
-        fprintf(config_file2, "HOST=%sPRONTO=%sSHELL=%sDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
-    fclose(config_file2);
-}
-
 void show_value()
 {
     char *token = strtok(variables[1], "$");
@@ -349,6 +324,26 @@ void show_value()
     }
 
     fclose(config_file);
+}
+
+void var_ambiente()
+{
+
+    if(variables[1] == NULL){
+        printf(COLOR_RED "Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n" COLOR_RESET);
+        return;
+    }
+    else if (strstr(variables[1], "=") != NULL)
+    {
+        // Atribui valor
+        change_value();
+    }
+    else if (strstr(variables[1], "$") != NULL)
+    {;
+        // Consulta valor
+        show_value();
+    }
+
 }
 
 void add_history()
