@@ -129,6 +129,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
     char aux_amb[99];
     strcpy(aux_amb, token);
     int loop = -1;
+    printf("IOOIOI1\n");
     while (token != NULL)
     {
         variables_amb[++loop] = malloc(sizeof(token) + 1);
@@ -136,13 +137,14 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
 
         token = strtok(NULL, "=");
     }
-
+    printf("IOOIOI2\n");
     FILE *config_file = fopen(".meushell.txt", "rt");
     if (!config_file)
     {
         printf("ERROR: The file \".meushell.txt\" could not be found! \n");
         exit(0);
     }
+    printf("IOOIOI3\n");
     int i = 1;
     loop = -1;
     while (!feof(config_file))
@@ -181,6 +183,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
         }
         i++;
     }
+    printf("IOOIOI4\n");
     if (strcmp(variables_amb[2], "HOST") == 0)
     {
         if (strcmp(aux_amb, "HOST") == 0)
@@ -274,6 +277,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
     {
         strcpy(DTA, variables_amb[2]);
     }
+    printf("IOOIOI5\n");
     fclose(config_file);
     escreve();
 }
