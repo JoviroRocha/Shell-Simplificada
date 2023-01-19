@@ -7,8 +7,8 @@
 
 int main(){
     char *variables[1];
-    char *var_amb_arq[1];
-    char *variables_amb[1];
+    char var_amb_arq[2][256];
+    char variables_amb[2][256];
     // Configure Shell
     printf(COLOR_GREEN "Configuring the shell...\n" COLOR_RESET);
     config();
@@ -16,8 +16,6 @@ int main(){
     while(1){
         // reseta as variáveis
         reset_variables(variables);
-        reset_variables(var_amb_arq);
-        reset_variables(variables_amb);
         // printa o PRONTO
         printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
         // recebe o input
@@ -46,6 +44,10 @@ int main(){
             int resp;
             // Executar o comando
            if( fork() == 0 ){
+                if(strcmp(variables[0],"hostname")==0){
+                    gethostname(HOST, sizeof(HOST));
+                    escreve();
+                } 
                 resp = execvp(path, variables);
                 if(resp == -1) printf(COLOR_RED "ERROR: Command not found\n" COLOR_RESET);
                 exit(0);

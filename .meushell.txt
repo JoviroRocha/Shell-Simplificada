@@ -1,4 +1,4 @@
 HOST=INF-PT
 PRONTO=/home/aluno/Shell-Simplificada
-SHELL=Simplified Shell
+SHELL=Simplified-Shell
 DTA=/home/aluno/Shell-Simplificada

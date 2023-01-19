@@ -11,6 +11,7 @@
 
 char HOST[30];
 char *PRONTO;
+char PRONTO_REF[256];
 char DTA[256];
 char SHELL[30];
 char data[100];
@@ -21,6 +22,8 @@ int loop;
 char *result;
 char Linha[100];
 
+void escreve();
+
 void get_current_directory()
 {
     if (getcwd(DTA, sizeof(DTA)) == NULL)
@@ -28,6 +31,7 @@ void get_current_directory()
         printf(COLOR_RED "ERROR: Could not get current directory <getcwd>\n" COLOR_RESET);
         exit(0);
     }
+    escreve();
 }
 
 void cd(char *variables[]){
@@ -40,6 +44,7 @@ void cd(char *variables[]){
         printf(COLOR_RED "ERROR: Command cd has failed\n" COLOR_RESET);
         return;
     }
+    
     get_current_directory();
 }
 
@@ -72,7 +77,7 @@ void config()
     // Sets PRONTO
     PRONTO = DTA;
     // Get Shell name
-    strcpy(SHELL, "Simplified Shell");
+    strcpy(SHELL, "Simplified-Shell");
     // Write it to file
     FILE *config_file = fopen(".meushell.txt", "w+");
     if (!config_file)
@@ -111,29 +116,30 @@ void escreve()
         exit(0);
     }
     if (strstr(HOST, "\"") == NULL)
-        fprintf(config_file2, "HOST=\"%s\"\nPRONTO=%s\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
     else if (strstr(PRONTO, "\"") == NULL)
-        fprintf(config_file2, "HOST=%s\nPRONTO=\"%s\"\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
     else if (strstr(SHELL, "\"") == NULL)
-        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=\"%s\"\nDTA=%s", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
     else if (strstr(DTA, "\"") == NULL)
-        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
     else
-        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=\"%s\"", HOST, PRONTO, SHELL, DTA);
+        fprintf(config_file2, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s", HOST, PRONTO, SHELL, DTA);
     fclose(config_file2);
 }
 
-void change_value(char * var_amb_arq[], char * variables_amb[], char * variables[])
+void change_value(char var_amb_arq[][256], char variables_amb[][256], char * variables[])
 {
     char *token = strtok(variables[1], "=");
     int loop = -1;
     while (token != NULL)
     {
-        variables_amb[++loop] = malloc(sizeof(token) + 1);
+        variables_amb[++loop];
         strcpy(variables_amb[loop], token);
-
+        
         token = strtok(NULL, "=");
     }
+    
     FILE *config_file = fopen(".meushell.txt", "rt");
     if (!config_file)
     {
@@ -144,7 +150,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
     loop = -1;
     while (!feof(config_file))
     {
-
+    
         // Lê uma linha (inclusive com o '\n')
         result = fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
 
@@ -153,40 +159,29 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
             char *token2 = strtok(Linha, "=");
             loop = -1;
             while (token2 != NULL)
-            {
-                var_amb_arq[++loop] = malloc(sizeof(token2) + 1);
+            {   
+            
+                var_amb_arq[++loop];
                 strcpy(var_amb_arq[loop], token2);
+                
                 token2 = strtok(NULL, "=");
             }
-
-            if (strcmp(var_amb_arq[0], "HOST") == 0)
-            {
-                strcpy(HOST, var_amb_arq[1]);
-            }
-            else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
-            {
-                strcpy(PRONTO, var_amb_arq[1]);
-            }
-            else if (strcmp(var_amb_arq[0], "SHELL") == 0)
-            {
-                strcpy(SHELL, var_amb_arq[1]);
-            }
-            else if (strcmp(var_amb_arq[0], "DTA") == 0)
-            {
-                strcpy(DTA, var_amb_arq[1]);
-            }
         }
+        
+        if(strcmp(var_amb_arq[0],variables_amb[0])==0) break;
         i++;
     }
     if (strcmp(variables_amb[1], "HOST") == 0)
     {
         if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
-            strcpy(HOST, HOST);
+            
         }
         else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
-            strcpy(PRONTO, HOST);
+            strcpy(PRONTO_REF,HOST);
+            PRONTO = PRONTO_REF;
+            
         }
         else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
@@ -194,7 +189,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
         }
         else if (strcmp(var_amb_arq[0], "DTA") == 0)
         {
-            strcpy(DTA, HOST);
+            strcpy(DTA,HOST);
         }
     }
     else if (strcmp(variables_amb[1], "PRONTO") == 0)
@@ -206,7 +201,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
         }
         else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
-            strcpy(PRONTO, PRONTO);
+            
         }
         else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
@@ -225,7 +220,8 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
         }
         else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
-            strcpy(PRONTO, SHELL);
+            strcpy(PRONTO_REF,SHELL);
+            PRONTO = PRONTO_REF;
         }
         else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
@@ -244,7 +240,7 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
         }
         else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
-            strcpy(PRONTO, DTA);
+            PRONTO = DTA;
         }
         else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
@@ -257,26 +253,31 @@ void change_value(char * var_amb_arq[], char * variables_amb[], char * variables
     }
     else if (strcmp(var_amb_arq[0], "HOST") == 0)
     {
+        
         strcpy(HOST, variables_amb[1]);
     }
     else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
     {
-        strcpy(PRONTO, variables_amb[1]);
+        
+        strcpy(PRONTO_REF,variables_amb[1]);
+        PRONTO = PRONTO_REF;
     }
     else if (strcmp(var_amb_arq[0], "SHELL") == 0)
     {
+            
         strcpy(SHELL, variables_amb[1]);
     }
     else if (strcmp(var_amb_arq[0], "DTA") == 0)
     {
+        
         strcpy(DTA, variables_amb[1]);
     }
-    printf("IOOIOI5\n");
+    
     fclose(config_file);
     escreve();
 }
 
-void show_value(char *var_amb_arq[], char *variables[])
+void show_value(char var_amb_arq[][256], char *variables[])
 {
     char *token = strtok(variables[1], "$");
     char aux_amb[10];
@@ -300,7 +301,7 @@ void show_value(char *var_amb_arq[], char *variables[])
             loop = -1;
             while (token2 != NULL)
             {
-                var_amb_arq[++loop] = malloc(sizeof(token2) + 1);
+                var_amb_arq[++loop];
                 strcpy(var_amb_arq[loop], token2);
                 token2 = strtok(NULL, "=");
             }
@@ -318,11 +319,11 @@ void show_value(char *var_amb_arq[], char *variables[])
     fclose(config_file);
 }
 
-void var_ambiente(char *variables[], char *var_amb_arq[], char * variables_amb[])
+void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb[][256])
 {
 
     if(variables[1] == NULL){
-        printf(COLOR_RED "Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n" COLOR_RESET);
+        printf(COLOR_GREEN "Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n" COLOR_RESET);
         return;
     }
     else if (strstr(variables[1], "=") != NULL)
