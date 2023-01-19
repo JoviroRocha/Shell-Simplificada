@@ -14,7 +14,6 @@ char *PRONTO;
 char DTA[256];
 char SHELL[30];
 char data[100];
-char data_save[100];
 char path[20];
 char file_path[256];
 

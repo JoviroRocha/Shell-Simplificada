@@ -7,6 +7,8 @@
 
 int main(){
     char *variables[0];
+    char *history[100];
+    char history_loop = 0;
     // Configure Shell
     printf(COLOR_GREEN "Configuring the shell...\n" COLOR_RESET);
     config();
@@ -18,12 +20,12 @@ int main(){
         printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
         // recebe o input
         scanf(" %[^\n]", data);
-        strcpy(data_save,data);
         //save history
+        strcpy(history[history_loop], data);
+        history_loop++;
+        for(int x = 0; x < history_loop; x++) printf("%s\n", history[history_loop]);
         // parseia o input
         parser(variables);
-        //adiciona ao histórico
-        add_history();
         // executa o input
         if (strcmp(variables[0], "cd") == 0){
             cd(variables);
@@ -32,6 +34,9 @@ int main(){
             clear();
         } 
         else if (strcmp(variables[0],"exit") == 0){
+            //adiciona o histórico
+            printf(COLOR_GREEN "Saving your history\n" COLOR_RESET);
+            add_history();
             printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
             return 0;
         }
