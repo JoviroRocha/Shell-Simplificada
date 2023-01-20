@@ -422,7 +422,14 @@ void add_history()
 void execute_history(char * variables[])
 {
     int tamanho = strlen(variables[0]);
-    for(int x = 0; x < tamanho; x ++)
+    if(! variables[0][1]){
+        printf(COLOR_RED "The command is empty!\n" COLOR_RESET);
+        return;
+    }
+    else{
+        variables[0][0] = variables[0][1];
+    }
+    for(int x = 1; x < tamanho; x ++)
     {
         if(isdigit(variables[0][x]) && isdigit(variables[0][x+1]))
             variables[0][x] = variables[0][x+1];
