@@ -30,8 +30,9 @@ int main()
         if (strcmp(variables[0], "cd") == 0)
         {
             cd(variables);
+            escreve();
         }
-        else if (strcmp(variables[0], "ajuda") == 0)
+        else if (strcmp(variables[0], "help") == 0)
         {
             help();
         }
