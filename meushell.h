@@ -381,7 +381,7 @@ void add_history()
 }
 
 void print_history(){
-    char c = " ";
+    char c = '';
     FILE *history_file = fopen(".meushell.hst", "r");
     if(!history_file){
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
