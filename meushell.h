@@ -372,7 +372,7 @@ int find_history()
 {
     char * aux;
     aux = data;
-    aux = strcat(aux, "\n")
+    aux = strcat(aux, "\n");
     FILE *history_file = fopen(".meushell.hst", "r");
     if(!history_file){
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
