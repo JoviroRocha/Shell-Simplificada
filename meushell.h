@@ -138,7 +138,7 @@ void escreve()
     FILE *config_file2 = fopen(".meushell.txt", "w+");
     if (!config_file2)
     {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        printf(COLOR_RED "ERROR: The file \".meushell.txt\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
     if (strstr(HOST, "\"") == NULL)
@@ -169,7 +169,7 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char * var
     FILE *config_file = fopen(".meushell.txt", "rt");
     if (!config_file)
     {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        printf(COLOR_RED "ERROR: The file \".meushell.txt\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
     int i = 1;
@@ -311,7 +311,7 @@ void show_value(char var_amb_arq[][256], char *variables[])
     FILE *config_file = fopen(".meushell.txt", "rt");
     if (!config_file)
     {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        printf(COLOR_RED "ERROR: The file \".meushell.txt\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
     int i = 1;
