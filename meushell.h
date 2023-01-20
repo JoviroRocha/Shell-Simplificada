@@ -401,7 +401,7 @@ void add_history()
     if(find_history() == 1) return;
     FILE *const_file = fopen(aux_const, "r");
     printf("TO AQUI \n");
-    fscanf(const_file, "%i", position);
+    fscanf(const_file, "%i", &position);
     printf("TO AQUI \n");
     fclose(const_file);
     FILE *history_file = fopen(file_path, "a");
