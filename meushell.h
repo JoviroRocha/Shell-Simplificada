@@ -24,74 +24,6 @@ char aux_meushell[256];
 
 void escreve();
 
-void exec_cmd_arq(char *variables2[])
-{
-
-    char *variables[1];
-    FILE *config_file = fopen(variables2[0], "rt");
-    if (!config_file)
-    {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
-        exit(0);
-    }
-    int i = 1;
-    int loop = -1;
-    while (!feof(config_file))
-    {
-        // Lê uma linha (inclusive com o '\n')
-        fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
-        parser(variables, Linha);
-        if (strcmp(variables[0], "cd") == 0)
-        {
-            cd(variables);
-            escreve();
-        }
-        else if (strstr(variables[0], ".cmds") == 0)
-        {
-            exec_cmd_arq(variables);
-        }
-        else if (strcmp(variables[0], "ajuda") == 0)
-        {
-            help();
-        }
-        else if (strcmp(variables[0], "amb") == 0)
-        {
-            var_ambiente(variables, var_amb_arq, variables_amb);
-        }
-        else if (strcmp(variables[0], "clear") == 0)
-        {
-            clear();
-        }
-        else if (strcmp(variables[0], "exit") == 0)
-        {
-            printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
-            return 0;
-        }
-        else
-        {
-            int resp;
-            // Executar o comando
-            if (fork() == 0)
-            {
-                if (strcmp(variables[0], "hostname") == 0)
-                {
-                    gethostname(HOST, sizeof(HOST));
-                    escreve();
-                }
-                resp = execvp(path, variables);
-                if (resp == -1)
-                    printf(COLOR_RED "ERROR: Command not found\n" COLOR_RESET);
-                exit(0);
-            }
-            wait(NULL);
-        }
-
-        i++;
-    }
-
-    fclose(config_file);
-}
-
 void help()
 {
 
@@ -461,4 +393,74 @@ void reset_variables(char *variables[])
     {
         variables[i] = NULL;
     }
+}
+
+void exec_cmd_arq(char *variables2[])
+{
+    char var_amb_arq[2][256];
+    char variables_amb[2][256];
+
+    char *variables[1];
+    FILE *config_file = fopen(variables2[0], "rt");
+    if (!config_file)
+    {
+        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        exit(0);
+    }
+    int i = 1;
+    int loop = -1;
+    while (!feof(config_file))
+    {
+        // Lê uma linha (inclusive com o '\n')
+        fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
+        parser(variables, Linha);
+        if (strcmp(variables[0], "cd") == 0)
+        {
+            cd(variables);
+            escreve();
+        }
+        else if (strstr(variables[0], ".cmds") == 0)
+        {
+            exec_cmd_arq(variables);
+        }
+        else if (strcmp(variables[0], "ajuda") == 0)
+        {
+            help();
+        }
+        else if (strcmp(variables[0], "amb") == 0)
+        {
+            var_ambiente(variables, var_amb_arq, variables_amb);
+        }
+        else if (strcmp(variables[0], "clear") == 0)
+        {
+            clear();
+        }
+        else if (strcmp(variables[0], "exit") == 0)
+        {
+            printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
+            return 0;
+        }
+        else
+        {
+            int resp;
+            // Executar o comando
+            if (fork() == 0)
+            {
+                if (strcmp(variables[0], "hostname") == 0)
+                {
+                    gethostname(HOST, sizeof(HOST));
+                    escreve();
+                }
+                resp = execvp(path, variables);
+                if (resp == -1)
+                    printf(COLOR_RED "ERROR: Command not found\n" COLOR_RESET);
+                exit(0);
+            }
+            wait(NULL);
+        }
+
+        i++;
+    }
+
+    fclose(config_file);
 }
