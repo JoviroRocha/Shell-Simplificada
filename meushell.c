@@ -35,6 +35,7 @@ int main()
         }
         else if (strcmp(variables[0], "help") == 0)
         {
+            main();
             help();
         }
         else if (strcmp(variables[0], "amb") == 0)
