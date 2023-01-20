@@ -404,7 +404,7 @@ void exec_cmd_arq(char *variables2[])
     FILE *config_file = fopen(variables2[0], "rt");
     if (!config_file)
     {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        printf("ERROR: The file \".cmds\" could not be found! \n");
         exit(0);
     }
     int i = 1;
@@ -416,7 +416,7 @@ void exec_cmd_arq(char *variables2[])
         // reseta as variáveis
         reset_variables(variables);
         // printa o PRONTO
-        printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
+        printf(COLOR_BLUE "%s $ %s\n" COLOR_RESET, PRONTO, Linha);
         // recebe o input
         // save history
         //  parseia o input
@@ -432,7 +432,6 @@ void exec_cmd_arq(char *variables2[])
         }
         else if (strcmp(variables[0], "ajuda") == 0)
         {
-
             help();
         }
         else if (strcmp(variables[0], "amb") == 0)
@@ -449,12 +448,11 @@ void exec_cmd_arq(char *variables2[])
         {
 
             printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
-            return 0;
+            return;
         }
         else
         {
             int resp;
-            printf("Entrou else\n");
             // Executar o comando
             if (fork() == 0)
             {
