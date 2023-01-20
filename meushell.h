@@ -57,7 +57,7 @@ void get_current_directory()
         printf(COLOR_RED "ERROR: Could not get current directory <getcwd>\n" COLOR_RESET);
         exit(0);
     }
-    escreve();
+    //escreve();
 }
 
 void cd(char *variables[]){
