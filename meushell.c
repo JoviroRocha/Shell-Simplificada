@@ -10,6 +10,7 @@ int main()
     char *variables[1];
     char var_amb_arq[2][256];
     char variables_amb[2][256];
+
     // Configure Shell
     printf(COLOR_GREEN "Configuring the shell...\n" COLOR_RESET);
     config();
@@ -22,12 +23,10 @@ int main()
         printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
         // recebe o input
         scanf(" %[^\n]", data);
-        strcpy(data_save, data);
-        // save history
-        //  parseia o input
-        parser(variables);
         // adiciona ao histórico
         add_history();
+        //  parseia o input
+        parser(variables);
         // executa o input
         if (strcmp(variables[0], "cd") == 0)
         {
@@ -45,6 +44,10 @@ int main()
         else if (strcmp(variables[0], "clear") == 0)
         {
             clear();
+        }
+        else if (strcmp(variables[0], "history") == 0) 
+        {
+            print_history();
         }
         else if (strcmp(variables[0], "exit") == 0)
         {
