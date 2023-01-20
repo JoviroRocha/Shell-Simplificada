@@ -376,7 +376,11 @@ int find_history()
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
-    while(!feof(history_file)) fgets(atual, 99, history_file);
+    printf("ATE AQUI EU CHEGUEI\n");
+    while(!feof(history_file)){
+        printf("ENTREI\n");
+        fgets(atual, 99, history_file);
+    } 
     printf("%s\n", atual);
     fclose(history_file);
     if(strcmp(atual,data) == 0){
