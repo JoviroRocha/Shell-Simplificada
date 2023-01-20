@@ -372,12 +372,12 @@ int find_history()
 {
     char *atual;
     char *ultima;
-    FILE *history_file = fopen(".meushell.hst", "a+");
+    FILE *history_file = fopen(".meushell.hst", "r");
     if(!history_file){
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
-    while(!feof(history_file)) atual = fgets(Linha, 99, history_file);
+    while(!feof(history_file)) fscanf(history_file, "%s", atual);
     printf("%s\n", atual);
     fclose(history_file);
     if(strcmp(atual,data) == 0){
