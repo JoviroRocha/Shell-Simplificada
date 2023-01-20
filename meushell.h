@@ -421,7 +421,8 @@ void add_history()
 void execute_history(char * variables[])
 {
     int tamanho = strlen(variables[0]);
-    printf("OPAAA: %d %c",tamanho, variables[0][0]);
+    for(int x = 0; x < tamanho; x ++) variables[0][x] = variables[0][x+1];
+    printf("OPAAA: %s\n" variables[0]);
     return;
 }
 
