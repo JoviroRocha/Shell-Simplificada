@@ -369,11 +369,28 @@ void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb
     }
 }
 
+void write_history(int loop, int aux){
+    FILE *write_history = fopen(".meushell.hst", "a+");
+    rewind(write_history);
+    fprintf(write_history, "%i\n", aux);
+    for(int x = 0; x < loop; x++){
+        char * p = fgets(Linha, 99, write_history);
+    }
+    fprintf(write_history, "%s", data);
+    fclose(write_history);
+    return;
+}
+
 void add_history()
 {
+    int loop, aux;
     FILE *history_file = fopen(".meushell.hst", "r");
-    int loop = fgetc(history_file);
-    printf("%d\n", loop);
+    result = fgets(Linha, 99, history_file);;
+    loop = strtol(result, NULL, 10);
+    aux = (loop + 1) % 100;
+    fclose(history_file);
+    write_history(loop, aux);
+    return;
 }
 
 void parser(char *variables[])
