@@ -428,7 +428,7 @@ void execute_history(char * variables[])
             variables[0][x] = variables[0][x+1];
         else
         {
-            printf(COLOR_RED "The value must be an integer\n" COLOR_RESET)
+            printf(COLOR_RED "The value must be an integer\n" COLOR_RESET);
             return;
         }
     }
