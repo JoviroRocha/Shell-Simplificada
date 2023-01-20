@@ -418,7 +418,7 @@ void add_history()
     return;
 }
 
-void execute_history()
+void execute_history(char * variables[])
 {
     int tamanho = strlen(variables[0]);
     printf("OPAAA: %d %c",tamanho, variables[0][0]);

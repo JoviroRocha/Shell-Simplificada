@@ -29,7 +29,7 @@ int main()
         parser(variables);
         // executa o input
         if(strstr(variables[0],"!")){
-            execute_history();
+            execute_history(variables);
         }
         else if (strcmp(variables[0], "cd") == 0)
         {
