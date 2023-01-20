@@ -379,10 +379,10 @@ int find_history()
     printf("ATE AQUI EU CHEGUEI\n");
     while(!feof(history_file)){
         printf("ENTREI\n");
-        fgets(atual, 99, history_file);
+        fgets(Linha, 99, history_file);
         printf("TO AQUI\n");
     } 
-    printf("%s\n", atual);
+    printf("%s\n", Linha);
     fclose(history_file);
     if(strcmp(atual,data) == 0){
         return 1;
