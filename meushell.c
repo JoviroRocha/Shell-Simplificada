@@ -28,7 +28,10 @@ int main()
         //  parseia o input
         parser(variables);
         // executa o input
-        if (strcmp(variables[0], "cd") == 0)
+        if(variables[0].includes('!')){
+            printf("I'm god\n");
+        }
+        else if (strcmp(variables[0], "cd") == 0)
         {
             cd(variables);
             escreve();
