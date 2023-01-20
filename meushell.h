@@ -40,6 +40,7 @@ void help()
     printf(COLOR_GREEN " --COMANDOS BASICOS DA SHELL-SIMPLIFICADA--\n");
     printf(COLOR_BLUE "\n   - \"cd <diretorio>\" muda do diretório atual para <diretório> e o valor da variável DTA é alterado.\n");
     printf(COLOR_BLUE "\n   - \"clear\" limpa a tela\n");
+    printf(COLOR_BLUE "\n   - \"history\" mostra os comandos já executados pelo usuário\n");
     printf(COLOR_BLUE "\n   - \"exit\" Sai da SHELL-SIMPLIFICADA\n");
     printf(COLOR_GREEN "\nCOMANDOS EXTERNOS\n");
     printf(COLOR_BLUE "   - \"Observação: ao utilizar o comando externo hostname, o valor da VAR HOST será alterado.\n");
