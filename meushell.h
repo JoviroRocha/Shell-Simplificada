@@ -371,6 +371,9 @@ void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb
 
 void add_history()
 {
+    FILE *history_file = fopen(".meushell.hst", "r");
+    int loop = fgetc(history_file);
+    printf("%d\n", loop);
 }
 
 void parser(char *variables[])

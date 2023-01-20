@@ -23,9 +23,10 @@ int main()
         printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
         // recebe o input
         scanf(" %[^\n]", data);
+        // adiciona ao histórico
+        add_history()
         //  parseia o input
         parser(variables);
-        // adiciona ao histórico
         // executa o input
         if (strcmp(variables[0], "cd") == 0)
         {
