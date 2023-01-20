@@ -390,7 +390,7 @@ void print_history(){
     c = fgetc(history_file);
     while (c != EOF)
     {
-        printf ("%c\n", c);
+        printf (COLOR_GREEN "%c", c);
         c = fgetc(history_file);
     }
     return;
