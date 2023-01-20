@@ -369,27 +369,15 @@ void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb
     }
 }
 
-void write_history(int loop, int aux){
-    FILE *write_history = fopen(".meushell.hst", "a+");
-    rewind(write_history);
-    fprintf(write_history, "%i\n", aux);
-    for(int x = 0; x < loop; x++){
-        char * p = fgets(Linha, 99, write_history);
-    }
-    fprintf(write_history, "%s\n", data);
-    fclose(write_history);
-    return;
-}
-
 void add_history()
 {
-    int loop, aux;
-    FILE *history_file = fopen(".meushell.hst", "r");
-    result = fgets(Linha, 99, history_file);;
-    loop = strtol(result, NULL, 10);
-    aux = (loop + 1) % 100;
+    FILE *history_file = fopen(".meushell.hst", "a");
+    if(!history_file){
+        printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
+        exit(0);
+    }
+    fprintf(history_file,"%s\n", data);
     fclose(history_file);
-    write_history(loop, aux);
     return;
 }
 
