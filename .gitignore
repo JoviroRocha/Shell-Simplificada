@@ -2,4 +2,4 @@
 *.exe
 *.vscode
 *.hst
-*.txt
+.meushell.txt

@@ -22,6 +22,7 @@ int loop;
 char *result;
 char Linha[100];
 char aux_meushell[256];
+char aux_const[256];
 
 void escreve();
 
@@ -100,6 +101,9 @@ void config()
     gethostname(HOST, sizeof(HOST));
     // Get Pronto
     get_current_directory();
+    // sets aux_const path
+    strcpy(aux_const, DTA);
+    strcat(aux_const, ".constants.txt");
     // sets aux_meushell path variaveis ambiente
     strcpy(aux_meushell, DTA);
     strcat(aux_meushell, "/.meushell.txt");
@@ -110,6 +114,9 @@ void config()
     PRONTO = DTA;
     // Get Shell name
     strcpy(SHELL, "Simplified-Shell");
+    // Write constants file
+    if(file_exists(aux_const) == 0)
+        printf(COLOR_RED "The constans file could not be found!\n" COLOR_RESET);
     // Write it to file
     FILE *config_file = fopen(aux_meushell, "w+");
     if (!config_file)
@@ -391,13 +398,20 @@ int find_history()
 void add_history()
 {
     if(find_history() == 1) return;
+    FILE *const_file = fopen(aux_const, "r");
+    fgets(Linha, 4, const_file);
+    int loop = atoi(Linha);
+    fclose(const_file);
     FILE *history_file = fopen(file_path, "a");
     if(!history_file){
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
-    fprintf(history_file,"%s\n", data);
+    fprintf(history_file,"%d %s\n", loop + 1, data);
     fclose(history_file);
+    FILE *new_const = fopen(aux_const, "w");
+    fprintf(new_const, "%d", loop + 1);
+    fclose(new_const);
     return;
 }
 
