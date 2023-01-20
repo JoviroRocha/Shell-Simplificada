@@ -7,6 +7,7 @@
 
 int main()
 {
+    char data[100];
     char *variables[1];
     char var_amb_arq[2][256];
     char variables_amb[2][256];
@@ -25,7 +26,7 @@ int main()
         strcpy(data_save, data);
         // save history
         //  parseia o input
-        parser(variables);
+        parser(variables, data);
         // adiciona ao histórico
         add_history();
         // executa o input
@@ -33,6 +34,9 @@ int main()
         {
             cd(variables);
             escreve();
+        }
+        else if(strstr(variables[0],".cmds")==0){
+            exec_cmd_arq(variables);
         }
         else if (strcmp(variables[0], "ajuda") == 0)
         {
