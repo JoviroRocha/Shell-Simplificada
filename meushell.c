@@ -28,7 +28,7 @@ int main()
         //  parseia o input
         parser(variables);
         // executa o input
-        if(variables[0].includes('!')){
+        if(strstr(variables[0],"!")){
             printf("I'm god\n");
         }
         else if (strcmp(variables[0], "cd") == 0)
