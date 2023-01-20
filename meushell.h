@@ -429,7 +429,7 @@ void execute_history(char * variables[])
     else{
         variables[0][0] = variables[0][1];
     }
-    for(int x = 1; x < tamanho; x ++)
+    for(int x = 1; x < tamanho - 1; x ++)
     {
         printf("%c %c\n",variables[0][x] ,variables[0][x+1]);
         if(isdigit(variables[0][x]) && isdigit(variables[0][x+1]))
