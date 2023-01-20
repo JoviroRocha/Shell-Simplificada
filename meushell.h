@@ -381,10 +381,10 @@ int find_history()
     int len = srtlen(Linha);
     Linha[--len] = 0;
     printf("LINHA: %s\n", Linha);
-    printf("DATA: %s\n", aux);
-    printf("COMP: %d\n", strcmp(Linha, aux));
+    printf("DATA: %s\n", data);
+    printf("COMP: %d\n", strcmp(Linha, data));
     fclose(history_file);
-    if(strcmp(Linha, aux) == 0){
+    if(strcmp(Linha, data) == 0){
         printf("YEEEES\n");
         return 1;
     }
