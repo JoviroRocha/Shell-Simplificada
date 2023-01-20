@@ -442,7 +442,7 @@ void execute_history(char * variables[])
             return;
         }
     }
-    variables[0][tamanho] = '\0';
+    variables[0][tamanho - 1] = '\0';
     printf("!@# %s\n", variables[0]);
     return;
 }
