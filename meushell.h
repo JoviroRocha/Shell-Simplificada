@@ -116,7 +116,10 @@ void config()
     strcpy(SHELL, "Simplified-Shell");
     // Write constants file
     if(file_exists(aux_const) == 0)
+    {
         printf(COLOR_RED "The constans file could not be found!\n" COLOR_RESET);
+        exit(0);
+    }
     // Write it to file
     FILE *config_file = fopen(aux_meushell, "w+");
     if (!config_file)
