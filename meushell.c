@@ -32,10 +32,11 @@ int main()
         // executa o input
         if (strcmp(variables[0], "cd") == 0)
         {
+            
             cd(variables);
             escreve();
         }
-        else if(strstr(variables[0],".cmds")==0){
+        else if(strstr(variables[0],".cmds")){
             exec_cmd_arq(variables);
         }
         else if (strcmp(variables[0], "ajuda") == 0)

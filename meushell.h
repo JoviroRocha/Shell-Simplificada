@@ -413,36 +413,48 @@ void exec_cmd_arq(char *variables2[])
     {
         // Lê uma linha (inclusive com o '\n')
         fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
+        // reseta as variáveis
+        reset_variables(variables);
+        // printa o PRONTO
+        printf(COLOR_BLUE "%s $ " COLOR_RESET, PRONTO);
+        // recebe o input
+        // save history
+        //  parseia o input
+        Linha[strcspn(Linha, "\n")] = 0;
         parser(variables, Linha);
+        // adiciona ao histórico
+        // executa o input
         if (strcmp(variables[0], "cd") == 0)
         {
+
             cd(variables);
             escreve();
         }
-        else if (strstr(variables[0], ".cmds") == 0)
-        {
-            exec_cmd_arq(variables);
-        }
         else if (strcmp(variables[0], "ajuda") == 0)
         {
+
             help();
         }
         else if (strcmp(variables[0], "amb") == 0)
         {
+
             var_ambiente(variables, var_amb_arq, variables_amb);
         }
         else if (strcmp(variables[0], "clear") == 0)
         {
+
             clear();
         }
         else if (strcmp(variables[0], "exit") == 0)
         {
+
             printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
             return 0;
         }
         else
         {
             int resp;
+            printf("Entrou else\n");
             // Executar o comando
             if (fork() == 0)
             {
