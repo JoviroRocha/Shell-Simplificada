@@ -103,7 +103,7 @@ void config()
     get_current_directory();
     // sets aux_const path
     strcpy(aux_const, DTA);
-    strcat(aux_const, ".constants.txt");
+    strcat(aux_const, "/.constants.txt");
     // sets aux_meushell path variaveis ambiente
     strcpy(aux_meushell, DTA);
     strcat(aux_meushell, "/.meushell.txt");
