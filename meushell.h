@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <ctype.h>
 
 #define COLOR_GREEN "\x1b[32m"
 #define COLOR_RED "\x1b[31m"
@@ -421,8 +422,17 @@ void add_history()
 void execute_history(char * variables[])
 {
     int tamanho = strlen(variables[0]);
-    for(int x = 0; x < tamanho; x ++) variables[0][x] = variables[0][x+1];
-    printf("OPAAA: %s\n", variables[0]);
+    for(int x = 0; x < tamanho; x ++)
+    {
+        if(isdigit(variables[0][x]) && isdigit(variables[0][x+1]))
+            variables[0][x] = variables[0][x+1];
+        else
+        {
+            printf(COLOR_RED "The value must be an integer\n" COLOR_RESET)
+            return;
+        }
+    }
+    printf("%s\n",variables[0]);
     return;
 }
 
