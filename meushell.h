@@ -24,6 +24,32 @@ char Linha[100];
 
 void escreve();
 
+void help(){
+    
+    printf(COLOR_GREEN"BEM VINDO A CENTRAL DE AJUDA SHELL-SIMPLIFICADA\n");
+    printf(COLOR_GREEN"\nCOMANDOS INTERNOS\n");
+    printf(COLOR_GREEN" --VARIAVEIS AMBIENTE--\n");
+    printf(COLOR_BLUE"\n   - \"amb\" lista as todas as variaveis ambiente da Shell-Simplificada\n");
+    printf(COLOR_BLUE"\n   - \"amb $VAR\" retorna o valor atual da VAR\n");
+    printf(COLOR_BLUE"\n   - \"amb VAR=<valor>\" uma variavel ambiente recebera o valor digitado\n");
+    printf(COLOR_BLUE"       - Observação: <valor> não pode ser separado por espaço, exemplos de uso: VAR=Ola-Mundo, VAR=Ola\n");
+    printf(COLOR_BLUE"       - Observação 2: <valor> pode ser outra variavel ambiente, exemplo: HOST=PRONTO\n");
+    printf(COLOR_BLUE"           - Observação 2.1: quando atribuir o valor de uma variavel a outra será apenas o valor da variavel sem adicionais.\"\n");
+    printf(COLOR_GREEN" --COMANDOS BASICOS DA SHELL-SIMPLIFICADA--\n");
+    printf(COLOR_BLUE"\n   - \"cd <diretorio>\" muda do diretório atual para <diretório> e o valor da variável DTA é alterado.\n");
+    printf(COLOR_BLUE"\n   - \"clear\" limpa a tela\n");
+    printf(COLOR_BLUE"\n   - \"exit\" Sai da SHELL-SIMPLIFICADA\n");
+    printf(COLOR_GREEN"\nCOMANDOS EXTERNOS\n");
+    printf(COLOR_BLUE"   - \"Observação: ao utilizar o comando externo hostname, o valor da VAR HOST será alterado.\n");
+    printf(COLOR_GREEN"\nOUTRAS FUNCIONALIDADES\n");
+    printf(COLOR_BLUE"\n   - Sempre que o usuario digitar um comando será armazenado em um historico.\n");
+    printf(COLOR_BLUE"       - Observação: Se o usuario digitar seguidamente o mesmo comando, só sera armazenado uma vez.\n");
+    printf(COLOR_BLUE"\n   - Apos utilizar a SHELL-SIMPLIFICADA uma vez e ter comandos salvos no historico, \n     o usuario podera acessar esses comandos por meio do comando !<numero>.\n");
+    printf(COLOR_BLUE"\n  - Existe a capacidade de executar comandos a partir de um arquivo fornecido como entrada, \n    Ou seja, ler comandos a partir de um arquivo e executá-los.\n");
+    printf(COLOR_BLUE"       - Observação: Os comandos dentro do arquivo devem estar separados por um espaço.\n");
+}
+
+
 void get_current_directory()
 {
     if (getcwd(DTA, sizeof(DTA)) == NULL)
