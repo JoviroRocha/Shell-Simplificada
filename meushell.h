@@ -395,12 +395,15 @@ int find_history()
     return 0;
 }
 
-void add_history()
+void add_history() 
 {
     if(find_history() == 1) return;
     FILE *const_file = fopen(aux_const, "r");
+    printf("TO AQUI \n");
     fgets(Linha, 4, const_file);
+    printf("TO AQUI \n");
     int loop = atoi(Linha);
+    printf("TO AQUI \n");
     fclose(const_file);
     FILE *history_file = fopen(file_path, "a");
     if(!history_file){
@@ -409,9 +412,11 @@ void add_history()
     }
     fprintf(history_file,"%d %s\n", loop + 1, data);
     fclose(history_file);
+    printf("TO AQUI \n");
     FILE *new_const = fopen(aux_const, "w");
     fprintf(new_const, "%d", loop + 1);
     fclose(new_const);
+    printf("TO AQUI \n");
     return;
 }
 
