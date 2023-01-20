@@ -418,6 +418,13 @@ void add_history()
     return;
 }
 
+void execute_history()
+{
+    int tamanho = strlen(variables[0]);
+    printf("OPAAA: %d %c",tamanho, variables[0][0]);
+    return;
+}
+
 void print_history(){
     char c = ' ';
     FILE *history_file = fopen(file_path, "r");

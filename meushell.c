@@ -29,7 +29,7 @@ int main()
         parser(variables);
         // executa o input
         if(strstr(variables[0],"!")){
-            printf("I'm god\n");
+            execute_history();
         }
         else if (strcmp(variables[0], "cd") == 0)
         {
