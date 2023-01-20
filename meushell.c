@@ -45,6 +45,10 @@ int main()
         {
             clear();
         }
+        else if (strcmp(variables[0], "history") == 0) 
+        {
+            print_history();
+        }
         else if (strcmp(variables[0], "exit") == 0)
         {
             printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);

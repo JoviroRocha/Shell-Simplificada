@@ -132,7 +132,6 @@ void config()
             printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
             exit(0);
         }
-        fprintf(history_file, "1");
         fclose(history_file);
         return;
     }
@@ -381,6 +380,17 @@ void add_history()
     return;
 }
 
+void print_history(){
+    FILE *history_file = fopen(".meushell.hst", "r");
+    if(!history_file){
+        printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
+        exit(0);
+    }
+    while(history_file != EOF){
+        printf("%s\n", fgets(Linha, 99, history_file));
+    } 
+    return;
+}
 void parser(char *variables[])
 {
     char *token = strtok(data, " ");
