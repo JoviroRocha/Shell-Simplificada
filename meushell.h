@@ -378,9 +378,9 @@ int find_history()
     while(!feof(history_file)){
         fgets(Linha, 99, history_file);;
     } 
-    printf("%s\n", Linha);
-    printf("%s\n", data);
-    printf("%d\n", strcmp(Linha, data));
+    printf("LINHA: %s\n", Linha);
+    printf("DATA: %s\n", data);
+    printf("COMP: %d\n", strcmp(Linha, data));
     fclose(history_file);
     if(strcmp(Linha, data) == 0){
         printf("YEEEES\n");
