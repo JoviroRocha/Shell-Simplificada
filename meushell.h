@@ -376,7 +376,7 @@ void write_history(int loop, int aux){
     for(int x = 0; x < loop; x++){
         char * p = fgets(Linha, 99, write_history);
     }
-    fprintf(write_history, "%s", data);
+    fprintf(write_history, "%s\n", data);
     fclose(write_history);
     return;
 }
