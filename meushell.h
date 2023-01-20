@@ -378,7 +378,7 @@ int find_history()
     while(!feof(history_file)){
         fgets(Linha, 99, history_file);;
     } 
-    int len = srtlen(Linha);
+    int len = strlen(Linha);
     Linha[--len] = 0;
     printf("LINHA: %s\n", Linha);
     printf("DATA: %s\n", data);
