@@ -370,12 +370,13 @@ void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb
 
 int find_history()
 {
+    char* atual;
     FILE *history_file = fopen(".meushell.hst", "a+");
     if(!history_file){
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
-    atual = fgets(LINHA, 99, history_file);
+    atual = fgets(Linha, 99, history_file);
     printf("%s\n", atual);
     fclose(history_file);
     if(strcmp(atual,data) == 0){
