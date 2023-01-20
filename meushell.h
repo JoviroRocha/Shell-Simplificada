@@ -21,34 +21,35 @@ char file_path[256];
 int loop;
 char *result;
 char Linha[100];
+char aux_meushell[256];
 
 void escreve();
 
-void help(){
-    
-    printf(COLOR_GREEN"BEM VINDO A CENTRAL DE AJUDA SHELL-SIMPLIFICADA\n");
-    printf(COLOR_GREEN"\nCOMANDOS INTERNOS\n");
-    printf(COLOR_GREEN" --VARIAVEIS AMBIENTE--\n");
-    printf(COLOR_BLUE"\n   - \"amb\" lista as todas as variaveis ambiente da Shell-Simplificada\n");
-    printf(COLOR_BLUE"\n   - \"amb $VAR\" retorna o valor atual da VAR\n");
-    printf(COLOR_BLUE"\n   - \"amb VAR=<valor>\" uma variavel ambiente recebera o valor digitado\n");
-    printf(COLOR_BLUE"       - Observação: <valor> não pode ser separado por espaço, exemplos de uso: VAR=Ola-Mundo, VAR=Ola\n");
-    printf(COLOR_BLUE"       - Observação 2: <valor> pode ser outra variavel ambiente, exemplo: HOST=PRONTO\n");
-    printf(COLOR_BLUE"           - Observação 2.1: quando atribuir o valor de uma variavel a outra será apenas o valor da variavel sem adicionais.\"\n");
-    printf(COLOR_GREEN" --COMANDOS BASICOS DA SHELL-SIMPLIFICADA--\n");
-    printf(COLOR_BLUE"\n   - \"cd <diretorio>\" muda do diretório atual para <diretório> e o valor da variável DTA é alterado.\n");
-    printf(COLOR_BLUE"\n   - \"clear\" limpa a tela\n");
-    printf(COLOR_BLUE"\n   - \"exit\" Sai da SHELL-SIMPLIFICADA\n");
-    printf(COLOR_GREEN"\nCOMANDOS EXTERNOS\n");
-    printf(COLOR_BLUE"   - \"Observação: ao utilizar o comando externo hostname, o valor da VAR HOST será alterado.\n");
-    printf(COLOR_GREEN"\nOUTRAS FUNCIONALIDADES\n");
-    printf(COLOR_BLUE"\n   - Sempre que o usuario digitar um comando será armazenado em um historico.\n");
-    printf(COLOR_BLUE"       - Observação: Se o usuario digitar seguidamente o mesmo comando, só sera armazenado uma vez.\n");
-    printf(COLOR_BLUE"\n   - Apos utilizar a SHELL-SIMPLIFICADA uma vez e ter comandos salvos no historico, \n     o usuario podera acessar esses comandos por meio do comando !<numero>.\n");
-    printf(COLOR_BLUE"\n  - Existe a capacidade de executar comandos a partir de um arquivo fornecido como entrada, \n    Ou seja, ler comandos a partir de um arquivo e executá-los.\n");
-    printf(COLOR_BLUE"       - Observação: Os comandos dentro do arquivo devem estar separados por um espaço.\n");
-}
+void help()
+{
 
+    printf(COLOR_GREEN "BEM VINDO A CENTRAL DE AJUDA SHELL-SIMPLIFICADA\n");
+    printf(COLOR_GREEN "\nCOMANDOS INTERNOS\n");
+    printf(COLOR_GREEN " --VARIAVEIS AMBIENTE--\n");
+    printf(COLOR_BLUE "\n   - \"amb\" lista as todas as variaveis ambiente da Shell-Simplificada\n");
+    printf(COLOR_BLUE "\n   - \"amb $VAR\" retorna o valor atual da VAR\n");
+    printf(COLOR_BLUE "\n   - \"amb VAR=<valor>\" uma variavel ambiente recebera o valor digitado\n");
+    printf(COLOR_BLUE "       - Observação: <valor> não pode ser separado por espaço, exemplos de uso: VAR=Ola-Mundo, VAR=Ola\n");
+    printf(COLOR_BLUE "       - Observação 2: <valor> pode ser outra variavel ambiente, exemplo: HOST=PRONTO\n");
+    printf(COLOR_BLUE "           - Observação 2.1: quando atribuir o valor de uma variavel a outra será apenas o valor da variavel sem adicionais.\"\n");
+    printf(COLOR_GREEN " --COMANDOS BASICOS DA SHELL-SIMPLIFICADA--\n");
+    printf(COLOR_BLUE "\n   - \"cd <diretorio>\" muda do diretório atual para <diretório> e o valor da variável DTA é alterado.\n");
+    printf(COLOR_BLUE "\n   - \"clear\" limpa a tela\n");
+    printf(COLOR_BLUE "\n   - \"exit\" Sai da SHELL-SIMPLIFICADA\n");
+    printf(COLOR_GREEN "\nCOMANDOS EXTERNOS\n");
+    printf(COLOR_BLUE "   - \"Observação: ao utilizar o comando externo hostname, o valor da VAR HOST será alterado.\n");
+    printf(COLOR_GREEN "\nOUTRAS FUNCIONALIDADES\n");
+    printf(COLOR_BLUE "\n   - Sempre que o usuario digitar um comando será armazenado em um historico.\n");
+    printf(COLOR_BLUE "       - Observação: Se o usuario digitar seguidamente o mesmo comando, só sera armazenado uma vez.\n");
+    printf(COLOR_BLUE "\n   - Apos utilizar a SHELL-SIMPLIFICADA uma vez e ter comandos salvos no historico, \n     o usuario podera acessar esses comandos por meio do comando !<numero>.\n");
+    printf(COLOR_BLUE "\n  - Existe a capacidade de executar comandos a partir de um arquivo fornecido como entrada, \n    Ou seja, ler comandos a partir de um arquivo e executá-los.\n");
+    printf(COLOR_BLUE "       - Observação: Os comandos dentro do arquivo devem estar separados por um espaço.\n");
+}
 
 void get_current_directory()
 {
@@ -57,11 +58,12 @@ void get_current_directory()
         printf(COLOR_RED "ERROR: Could not get current directory <getcwd>\n" COLOR_RESET);
         exit(0);
     }
-    //escreve();
 }
 
-void cd(char *variables[]){
-    if(variables[2]){
+void cd(char *variables[])
+{
+    if (variables[2])
+    {
         printf(COLOR_RED "ERROR: Too many arguments for cd\n" COLOR_RESET);
         return;
     }
@@ -70,7 +72,7 @@ void cd(char *variables[]){
         printf(COLOR_RED "ERROR: Command cd has failed\n" COLOR_RESET);
         return;
     }
-    
+
     get_current_directory();
 }
 
@@ -97,6 +99,9 @@ void config()
     gethostname(HOST, sizeof(HOST));
     // Get Pronto
     get_current_directory();
+    // sets aux_meushell path variaveis ambiente
+    strcpy(aux_meushell, DTA);
+    strcat(aux_meushell, "/.meushell.txt");
     // sets file_path
     strcpy(file_path, DTA);
     strcat(file_path, "/.meushell.hst");
@@ -105,7 +110,7 @@ void config()
     // Get Shell name
     strcpy(SHELL, "Simplified-Shell");
     // Write it to file
-    FILE *config_file = fopen(".meushell.txt", "w+");
+    FILE *config_file = fopen(aux_meushell, "w+");
     if (!config_file)
     {
         printf(COLOR_RED "ERROR: The file \".meushell.txt\" could not be found! \n" COLOR_RESET);
@@ -135,7 +140,7 @@ void config()
 
 void escreve()
 {
-    FILE *config_file2 = fopen(".meushell.txt", "w+");
+    FILE *config_file2 = fopen(aux_meushell, "w+");
     if (!config_file2)
     {
         printf("ERROR: The file \".meushell.txt\" could not be found! \n");
@@ -154,7 +159,7 @@ void escreve()
     fclose(config_file2);
 }
 
-void change_value(char var_amb_arq[][256], char variables_amb[][256], char * variables[])
+void change_value(char var_amb_arq[][256], char variables_amb[][256], char *variables[])
 {
     char *token = strtok(variables[1], "=");
     int loop = -1;
@@ -162,11 +167,11 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char * var
     {
         variables_amb[++loop];
         strcpy(variables_amb[loop], token);
-        
+
         token = strtok(NULL, "=");
     }
-    
-    FILE *config_file = fopen(".meushell.txt", "rt");
+
+    FILE *config_file = fopen(aux_meushell, "rt");
     if (!config_file)
     {
         printf("ERROR: The file \".meushell.txt\" could not be found! \n");
@@ -176,7 +181,7 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char * var
     loop = -1;
     while (!feof(config_file))
     {
-    
+
         // Lê uma linha (inclusive com o '\n')
         result = fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
 
@@ -185,29 +190,28 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char * var
             char *token2 = strtok(Linha, "=");
             loop = -1;
             while (token2 != NULL)
-            {   
-            
+            {
+
                 var_amb_arq[++loop];
                 strcpy(var_amb_arq[loop], token2);
-                
+
                 token2 = strtok(NULL, "=");
             }
         }
-        
-        if(strcmp(var_amb_arq[0],variables_amb[0])==0) break;
+
+        if (strcmp(var_amb_arq[0], variables_amb[0]) == 0)
+            break;
         i++;
     }
     if (strcmp(variables_amb[1], "HOST") == 0)
     {
         if (strcmp(var_amb_arq[0], "HOST") == 0)
         {
-            
         }
         else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
-            strcpy(PRONTO_REF,HOST);
+            strcpy(PRONTO_REF, HOST);
             PRONTO = PRONTO_REF;
-            
         }
         else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
@@ -215,7 +219,7 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char * var
         }
         else if (strcmp(var_amb_arq[0], "DTA") == 0)
         {
-            strcpy(DTA,HOST);
+            strcpy(DTA, HOST);
         }
     }
     else if (strcmp(variables_amb[1], "PRONTO") == 0)
@@ -227,7 +231,6 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char * var
         }
         else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
-            
         }
         else if (strcmp(var_amb_arq[0], "SHELL") == 0)
         {
@@ -246,7 +249,7 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char * var
         }
         else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
         {
-            strcpy(PRONTO_REF,SHELL);
+            strcpy(PRONTO_REF, SHELL);
             PRONTO = PRONTO_REF;
         }
         else if (strcmp(var_amb_arq[0], "SHELL") == 0)
@@ -279,26 +282,26 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char * var
     }
     else if (strcmp(var_amb_arq[0], "HOST") == 0)
     {
-        
+
         strcpy(HOST, variables_amb[1]);
     }
     else if (strcmp(var_amb_arq[0], "PRONTO") == 0)
     {
-        
-        strcpy(PRONTO_REF,variables_amb[1]);
+
+        strcpy(PRONTO_REF, variables_amb[1]);
         PRONTO = PRONTO_REF;
     }
     else if (strcmp(var_amb_arq[0], "SHELL") == 0)
     {
-            
+
         strcpy(SHELL, variables_amb[1]);
     }
     else if (strcmp(var_amb_arq[0], "DTA") == 0)
     {
-        
+
         strcpy(DTA, variables_amb[1]);
     }
-    
+
     fclose(config_file);
     escreve();
 }
@@ -308,7 +311,7 @@ void show_value(char var_amb_arq[][256], char *variables[])
     char *token = strtok(variables[1], "$");
     char aux_amb[10];
     strcpy(aux_amb, token);
-    FILE *config_file = fopen(".meushell.txt", "rt");
+    FILE *config_file = fopen(aux_meushell, "rt");
     if (!config_file)
     {
         printf("ERROR: The file \".meushell.txt\" could not be found! \n");
@@ -348,7 +351,8 @@ void show_value(char var_amb_arq[][256], char *variables[])
 void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb[][256])
 {
 
-    if(variables[1] == NULL){
+    if (variables[1] == NULL)
+    {
         printf(COLOR_GREEN "Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n" COLOR_RESET);
         return;
     }
@@ -358,16 +362,15 @@ void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb
         change_value(var_amb_arq, variables_amb, variables);
     }
     else if (strstr(variables[1], "$") != NULL)
-    {;
+    {
+        ;
         // Consulta valor
         show_value(var_amb_arq, variables);
     }
-
 }
 
 void add_history()
 {
-
 }
 
 void parser(char *variables[])
@@ -385,8 +388,10 @@ void parser(char *variables[])
     strcat(path, variables[0]);
 }
 
-void reset_variables(char *variables[]){
-    for(int i = 0; variables[i] != NULL; i++){
+void reset_variables(char *variables[])
+{
+    for (int i = 0; variables[i] != NULL; i++)
+    {
         variables[i] = NULL;
     }
 }
