@@ -427,11 +427,10 @@ void execute_history(char * variables[])
         return;
     }
     else{
-        variables[0][0] = variables[0][1];
+        variables[0][0] = 0;
     }
-    for(int x = 1; x < tamanho - 1; x ++)
+    for(int x = 0; x < tamanho - 1; x ++)
     {
-        printf("::! %c %c\n",variables[0][x] ,variables[0][x+1]);
         if(isdigit(variables[0][x]) && isdigit(variables[0][x+1]))
         {
             variables[0][x] = variables[0][x+1];
