@@ -427,7 +427,7 @@ void execute_history(char * variables[])
         return;
     }
     else{
-        variables[0][0] = "0";
+        variables[0][0] = '0';
     }
     for(int x = 0; x < tamanho - 1; x ++)
     {
@@ -442,7 +442,7 @@ void execute_history(char * variables[])
             return;
         }
     }
-    variables[0][tamanho] = "\0";
+    variables[0][tamanho] = '\0';
     return;
 }
 
