@@ -443,6 +443,7 @@ void execute_history(char * variables[])
         }
     }
     variables[0][tamanho] = '\0';
+    printf("!@# %s\n", variables[0]);
     return;
 }
 
