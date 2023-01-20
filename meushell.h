@@ -380,6 +380,7 @@ int find_history()
     while(!feof(history_file)){
         printf("ENTREI\n");
         fgets(atual, 99, history_file);
+        printf("TO AQUI\n");
     } 
     printf("%s\n", atual);
     fclose(history_file);
