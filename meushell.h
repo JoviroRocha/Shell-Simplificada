@@ -384,7 +384,7 @@ int find_history()
         exit(0);
     }
     while(!feof(history_file)){
-        fgets(Linha, 99, history_file);;
+        fgets(Linha, 99, history_file);
     } 
     int len = strlen(Linha);
     Linha[--len] = 0;
@@ -400,7 +400,7 @@ void add_history()
     if(find_history() == 1) return;
     FILE *const_file = fopen(aux_const, "r");
     printf("TO AQUI \n");
-    fgets(Linha, 4, const_file);
+    fgets(Linha, 99, const_file);
     printf("TO AQUI \n");
     int loop = atoi(Linha);
     printf("TO AQUI \n");
