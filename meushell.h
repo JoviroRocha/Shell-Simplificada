@@ -431,10 +431,11 @@ void execute_history(char * variables[])
     }
     for(int x = 1; x < tamanho - 1; x ++)
     {
-        printf("%c %c\n",variables[0][x] ,variables[0][x+1]);
+        printf("::! %c %c\n",variables[0][x] ,variables[0][x+1]);
         if(isdigit(variables[0][x]) && isdigit(variables[0][x+1]))
         {
             variables[0][x] = variables[0][x+1];
+            printf("%s\n",variables[0]);
         }
         else
         {
@@ -442,7 +443,6 @@ void execute_history(char * variables[])
             return;
         }
     }
-    printf("%s\n",variables[0]);
     return;
 }
 
