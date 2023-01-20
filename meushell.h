@@ -431,8 +431,11 @@ void execute_history(char * variables[])
     }
     for(int x = 1; x < tamanho; x ++)
     {
+        printf("%c %c\n",variables[0][x] ,variables[0][x+1]);
         if(isdigit(variables[0][x]) && isdigit(variables[0][x+1]))
+        {
             variables[0][x] = variables[0][x+1];
+        }
         else
         {
             printf(COLOR_RED "The value must be an integer\n" COLOR_RESET);
