@@ -381,6 +381,7 @@ int find_history()
     printf("%s\n", Linha);
     fclose(history_file);
     if(strcmp(Linha,data) == 0){
+        printf("YEEEES\n");
         return 1;
     }
     return 0;
