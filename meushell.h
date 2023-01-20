@@ -379,8 +379,10 @@ int find_history()
         fgets(Linha, 99, history_file);;
     } 
     printf("%s\n", Linha);
+    printf("%s\n", data);
+    printf("%d\n", strcmp(Linha, data));
     fclose(history_file);
-    if(strcmp(Linha,data) == 0){
+    if(strcmp(Linha, data) == 0){
         printf("YEEEES\n");
         return 1;
     }
