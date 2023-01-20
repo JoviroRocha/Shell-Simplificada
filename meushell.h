@@ -400,9 +400,7 @@ void add_history()
     if(find_history() == 1) return;
     FILE *const_file = fopen(aux_const, "r");
     printf("TO AQUI \n");
-    fgets(Linha, 99, const_file);
-    printf("TO AQUI \n");
-    int loop = atoi(Linha);
+    fscanf(const_file, "%d", loop);
     printf("TO AQUI \n");
     fclose(const_file);
     FILE *history_file = fopen(file_path, "a");
