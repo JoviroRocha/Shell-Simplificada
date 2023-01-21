@@ -421,6 +421,8 @@ void add_history()
 
 void execute_history(char * variables[])
 {
+    // Fix the number
+    int number;
     int tamanho = strlen(variables[0]);
     if(! variables[0][1]){
         printf(COLOR_RED "The command is empty!\n" COLOR_RESET);
@@ -434,7 +436,6 @@ void execute_history(char * variables[])
         if(isdigit(variables[0][x]) && isdigit(variables[0][x+1]))
         {
             variables[0][x] = variables[0][x+1];
-            printf("!!==%s\n",variables[0]);
         }
         else
         {
@@ -443,7 +444,27 @@ void execute_history(char * variables[])
         }
     }
     variables[0][tamanho - 1] = '\0';
-    printf("!@# %s\n", variables[0]);
+    int position = atoi(variables[0]);
+    printf("POSITION: %d\n", position);
+    char *line;
+    char *aux = variables[0];
+    int file_position;
+    // See if the number is in the history
+    FILE *history_file = fopen(file_path, "r");
+    if(!history_file){
+        printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
+        exit(0);
+    }
+     while(!feof(history_file)){
+        fscanf(history_file, "%d %s", &file_position, line);
+
+        if(file_position == position)
+        {
+            main_function();
+            return;
+        }
+    }
+    printf(COLOR_RED "There is no such value in history: %s\n" COLOR_RESET, aux);
     return;
 }
 
