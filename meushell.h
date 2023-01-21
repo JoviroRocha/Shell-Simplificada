@@ -460,7 +460,7 @@ void execute_history(char * variables[])
 
         if(file_position == position)
         {
-            main_function();
+            //main_function();
             return;
         }
     }
