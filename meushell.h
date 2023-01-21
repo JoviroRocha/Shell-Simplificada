@@ -48,6 +48,7 @@ void help()
     printf(COLOR_BLUE "\n   - Apos utilizar a SHELL-SIMPLIFICADA uma vez e ter comandos salvos no historico, \n     o usuario podera acessar esses comandos por meio do comando !<numero>.\n");
     printf(COLOR_BLUE "\n  - Existe a capacidade de executar comandos a partir de um arquivo fornecido como entrada, \n    Ou seja, ler comandos a partir de um arquivo e executá-los.\n");
     printf(COLOR_BLUE "       - Observação: Os comandos dentro do arquivo devem estar separados por um espaço.\n");
+    printf(COLOR_BLUE "       - Observação 2: Na shell para rodar os comandos dentro do arquivo apenas digite ex: arquivo.cmds\n");
 }
 
 void get_current_directory()
@@ -452,7 +453,7 @@ void exec_cmd_arq(char *variables2[])
         {
 
             printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
-            return;
+            exit(0);
         }
         else
         {
@@ -468,7 +469,7 @@ void exec_cmd_arq(char *variables2[])
                 resp = execvp(path, variables);
                 if (resp == -1)
                     printf(COLOR_RED "ERROR: Command not found\n" COLOR_RESET);
-                return 0;
+                exit(0);
             }
             wait(NULL);
         }
