@@ -413,12 +413,14 @@ void exec_cmd_arq(char *variables2[])
     while (!feof(config_file))
     {
         // Lê uma linha (inclusive com o '\n')
-        resultado=fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
-        if(resultado==NULL) break;
+        resultado = fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
+        if (resultado == NULL)
+            break;
         // reseta as variáveis
         reset_variables(variables);
         // printa o PRONTO
-        printf(COLOR_BLUE "%s $ %s\n" COLOR_RESET, PRONTO, Linha);
+        printf(COLOR_BLUE "%s $\n" COLOR_RESET, PRONTO);
+        printf(" %s\n", Linha);
         // recebe o input
         // save history
         //  parseia o input
