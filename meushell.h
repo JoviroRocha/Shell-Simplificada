@@ -121,20 +121,19 @@ void config()
     fprintf(config_file, "HOST=%s\nPRONTO=%s\nSHELL=%s\nDTA=%s\n", HOST, PRONTO, SHELL, DTA);
     fclose(config_file);
     // Write to the history file
-    if (file_exists(".meushell.hst") == 1)
+    if (file_exists(file_path) == 1)
     {
 
         return;
     }
     else
     {
-        FILE *history_file = fopen(".meushell.hst", "w+");
+        FILE *history_file = fopen(file_path, "w+");
         if (!history_file)
         {
             printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
             exit(0);
         }
-        fprintf(history_file, "1");
         fclose(history_file);
         return;
     }
@@ -145,7 +144,7 @@ void escreve()
     FILE *config_file2 = fopen(aux_meushell, "w+");
     if (!config_file2)
     {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        printf(COLOR_RED "ERROR: The file \".meushell.txt\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
     if (strstr(HOST, "\"") == NULL)
@@ -176,7 +175,7 @@ void change_value(char var_amb_arq[][256], char variables_amb[][256], char *vari
     FILE *config_file = fopen(aux_meushell, "rt");
     if (!config_file)
     {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        printf(COLOR_RED "ERROR: The file \".meushell.txt\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
     int i = 1;
@@ -316,7 +315,7 @@ void show_value(char var_amb_arq[][256], char *variables[])
     FILE *config_file = fopen(aux_meushell, "rt");
     if (!config_file)
     {
-        printf("ERROR: The file \".meushell.txt\" could not be found! \n");
+        printf(COLOR_RED "ERROR: The file \".meushell.txt\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
     int i = 1;
@@ -371,8 +370,52 @@ void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb
     }
 }
 
+int find_history()
+{
+    FILE *history_file = fopen(file_path, "r");
+    if(!history_file){
+        printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
+        exit(0);
+    }
+    while(!feof(history_file)){
+        fgets(Linha, 99, history_file);;
+    } 
+    int len = strlen(Linha);
+    Linha[--len] = 0;
+    fclose(history_file);
+    if(strcmp(Linha, data) == 0){
+        return 1;
+    }
+    return 0;
+}
+
 void add_history()
 {
+    if(find_history() == 1) return;
+    FILE *history_file = fopen(file_path, "a");
+    if(!history_file){
+        printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
+        exit(0);
+    }
+    fprintf(history_file,"%s\n", data);
+    fclose(history_file);
+    return;
+}
+
+void print_history(){
+    char c = ' ';
+    FILE *history_file = fopen(file_path, "r");
+    if(!history_file){
+        printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
+        exit(0);
+    }
+    c = fgetc(history_file);
+    while (c != EOF)
+    {
+        printf (COLOR_GREEN "%c", c);
+        c = fgetc(history_file);
+    }
+    return;
 }
 
 void parser(char *variables[], char data[100])
