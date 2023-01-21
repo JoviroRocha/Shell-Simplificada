@@ -555,7 +555,7 @@ void shell_functions(char data[100], char *variables[], char var_amb_arq[][256],
     else if (strcmp(variables[0], "exit") == 0)
     {
         printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
-        return 0;
+        exit(0);
     }
     else
     {
