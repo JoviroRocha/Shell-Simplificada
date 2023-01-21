@@ -411,7 +411,7 @@ void add_history()
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
-    fprintf(history_file,"%d %s\n", position + 1, data);
+    fprintf(history_file,"%d %s", position + 1, data);
     fclose(history_file);
     FILE *new_const = fopen(aux_const, "w");
     fprintf(new_const, "%d", position + 1);
