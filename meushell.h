@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <ctype.h>
 
 #define COLOR_GREEN "\x1b[32m"
 #define COLOR_RED "\x1b[31m"
@@ -20,6 +21,7 @@ int loop;
 char *result;
 char Linha[100];
 char aux_meushell[256];
+char aux_const[256];
 
 void escreve();
 
@@ -39,6 +41,7 @@ void help()
     printf(COLOR_BLUE "\n   - \"cd <diretorio>\" muda do diretório atual para <diretório> e o valor da variável DTA é alterado.\n");
     printf(COLOR_BLUE "\n   - \"history\" mostra todo o seu historico de comandos \n");
     printf(COLOR_BLUE "\n   - \"clear\" limpa a tela\n");
+    printf(COLOR_BLUE "\n   - \"history\" mostra os comandos já executados pelo usuário\n");
     printf(COLOR_BLUE "\n   - \"exit\" Sai da SHELL-SIMPLIFICADA\n");
     printf(COLOR_GREEN "\nCOMANDOS EXTERNOS\n");
     printf(COLOR_BLUE "   - \"Observação: ao utilizar o comando externo hostname, o valor da VAR HOST será alterado.\n");
@@ -100,6 +103,9 @@ void config()
     gethostname(HOST, sizeof(HOST));
     // Get Pronto
     get_current_directory();
+    // sets aux_const path
+    strcpy(aux_const, DTA);
+    strcat(aux_const, "/.constants.txt");
     // sets aux_meushell path variaveis ambiente
     strcpy(aux_meushell, DTA);
     strcat(aux_meushell, "/.meushell.txt");
@@ -110,6 +116,12 @@ void config()
     PRONTO = DTA;
     // Get Shell name
     strcpy(SHELL, "Simplified-Shell");
+    // Write constants file
+    if(file_exists(aux_const) == 0)
+    {
+        printf(COLOR_RED "The constans file could not be found!\n" COLOR_RESET);
+        exit(0);
+    }
     // Write it to file
     FILE *config_file = fopen(aux_meushell, "w+");
     if (!config_file)
@@ -382,7 +394,7 @@ int find_history(char data[100])
         exit(0);
     }
     while(!feof(history_file)){
-        fgets(Linha, 99, history_file);;
+        fgets(Linha, 99, history_file);
     } 
     int len = strlen(Linha);
     Linha[--len] = 0;
@@ -393,16 +405,78 @@ int find_history(char data[100])
     return 0;
 }
 
-void add_history(char data[100])
+void add_history(char data[100]) 
 {
+    int position;
     if(find_history(data) == 1) return;
+    FILE *const_file = fopen(aux_const, "r");
+    fscanf(const_file, "%i", &position);
+    fclose(const_file);
     FILE *history_file = fopen(file_path, "a");
     if(!history_file){
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
-    fprintf(history_file,"%s\n", data);
+    fprintf(history_file,"%d %s\n", position + 1, data);
     fclose(history_file);
+    FILE *new_const = fopen(aux_const, "w");
+    fprintf(new_const, "%d", position + 1);
+    fclose(new_const);
+    return;
+}
+
+void execute_history(char * variables[])
+{
+    // Fix the number
+    int number;
+    int tamanho = strlen(variables[0]);
+    if(! variables[0][1]){
+        printf(COLOR_RED "The command is empty!\n" COLOR_RESET);
+        return;
+    }
+    else{
+        variables[0][0] = '0';
+    }
+    for(int x = 0; x < tamanho - 1; x ++)
+    {
+        if(isdigit(variables[0][x]) && isdigit(variables[0][x+1]))
+        {
+            variables[0][x] = variables[0][x+1];
+        }
+        else
+        {
+            printf(COLOR_RED "The value must be an integer\n" COLOR_RESET);
+            return;
+        }
+    }
+    variables[0][tamanho - 1] = '\0';
+    int position = atoi(variables[0]);
+    int file_position;
+    char *line;
+    char *aux = variables[0];
+    // See if the number is in the history
+    FILE *history_file = fopen(file_path, "r");
+    if(!history_file){
+        printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
+        exit(0);
+    }
+    int p = 10;
+    while(p < 15){
+        int x = fscanf(history_file, "%d %s\n", &file_position, line);
+        printf("::: %d\n", x);
+        fgetc(history_file);
+        printf("Hmm oi? %d %s\n", file_position, line);
+        if(file_position == position)
+        {
+            printf("Deveria vazare\n");
+            fclose(history_file);
+            //main_function();
+            return;
+        }
+        p++;
+    }
+    fclose(history_file);
+    printf(COLOR_RED "There is no such value in history: %s\n" COLOR_RESET, aux);
     return;
 }
 
