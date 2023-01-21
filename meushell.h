@@ -37,6 +37,7 @@ void help()
     printf(COLOR_BLUE "           - Observação 2.1: quando atribuir o valor de uma variavel a outra será apenas o valor da variavel sem adicionais.\"\n");
     printf(COLOR_GREEN " --COMANDOS BASICOS DA SHELL-SIMPLIFICADA--\n");
     printf(COLOR_BLUE "\n   - \"cd <diretorio>\" muda do diretório atual para <diretório> e o valor da variável DTA é alterado.\n");
+    printf(COLOR_BLUE "\n   - \"history\" mostra todo o seu historico de comandos \n");
     printf(COLOR_BLUE "\n   - \"clear\" limpa a tela\n");
     printf(COLOR_BLUE "\n   - \"exit\" Sai da SHELL-SIMPLIFICADA\n");
     printf(COLOR_GREEN "\nCOMANDOS EXTERNOS\n");
@@ -48,7 +49,7 @@ void help()
     printf(COLOR_BLUE "       - Observação: Os comandos dentro do arquivo devem estar separados por um espaço.\n");
     printf(COLOR_BLUE "       - Observação 2: Na shell para rodar os comandos dentro do arquivo apenas digite ex: arquivo.cmds\n");
     printf(COLOR_BLUE "--------------------------------------------------------------------------------\n");
-    printf(COLOR_BLUE "PRONTO exibira na shell-simplificada o valor de DTA, ate ser alterado para outro valor,\n    se for atribuido novamente PRONTO=DTA voltara a apontar para o diretorio atual\n");
+    printf(COLOR_BLUE "PRONTO exibira na shell-simplificada o valor de DTA, ate ser alterado para outro valor,\n    se for atribuido novamente PRONTO=DTA voltara a apontar para o diretorio atual\n\n");
 }
 
 void get_current_directory()
