@@ -455,16 +455,17 @@ void execute_history(char * variables[])
         exit(0);
     }
      while(!feof(history_file)){
-        printf("Hmm oi?\n");
         fscanf(history_file, "%d %s", &file_position, line);
-
+        printf("Hmm oi? %d %s\n", file_position, line);
         if(file_position == position)
         {
             printf("Deveria vazare\n");
+            fclose(history_file);
             //main_function();
             return;
         }
     }
+    fclose(history_file);
     printf(COLOR_RED "There is no such value in history: %s\n" COLOR_RESET, aux);
     return;
 }
