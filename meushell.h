@@ -416,6 +416,47 @@ void print_history(){
     return;
 }
 
+void le_arquivo(){
+    FILE *arq;
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
+    arq=fopen("arquivo.txt","rt");  
+    if (arq==NULL)  
+        printf("Não conseguiu abrir o arquivo\n");  
+    else  
+    {  
+        printf("Arquivo aberto com sucesso\n");  
+        while ((read = getline(&line, &len, fp)) != -1))  
+        {  
+            if (strcmp(read, "cd") == 0)
+            {
+                //não sei oq colocar aqui
+                escreve();
+            }
+            else if (strcmp(read, "help") == 0)
+            {
+                help();
+            }
+            else if (strcmp(read, "clear") == 0)
+            {
+                clear();
+            }
+            else if (strcmp(read, "history") == 0) 
+            {
+                print_history();
+            }
+            else if (strcmp(variables[0], "exit") == 0)
+            {
+                printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
+                return 0;
+            }
+        }
+        fclose(arq);  
+    }  
+}
+
 void parser(char *variables[])
 {
     char *token = strtok(data, " ");

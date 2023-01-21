@@ -49,6 +49,10 @@ int main()
         {
             print_history();
         }
+        else if (strcmp(variables[0], "lerarquivo") == 0) 
+        {
+            le_arquivo();
+        }
         else if (strcmp(variables[0], "exit") == 0)
         {
             printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
