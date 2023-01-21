@@ -454,8 +454,7 @@ void execute_history(char * variables[])
         printf(COLOR_RED "ERROR: The file \".meushell.hst\" could not be found! \n" COLOR_RESET);
         exit(0);
     }
-     while(!feof(history_file)){
-        fscanf(history_file, "%d %s", &file_position, line);
+     while(fscanf(history_file, "%d %s", &file_position, line) != -1){
         printf("Hmm oi? %d %s\n", file_position, line);
         if(file_position == position)
         {
@@ -464,7 +463,7 @@ void execute_history(char * variables[])
             //main_function();
             return;
         }
-        history_file++;
+
     }
     fclose(history_file);
     printf(COLOR_RED "There is no such value in history: %s\n" COLOR_RESET, aux);
