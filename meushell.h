@@ -370,7 +370,7 @@ void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb
     }
 }
 
-int find_history()
+int find_history(char data[100])
 {
     FILE *history_file = fopen(file_path, "r");
     if(!history_file){
@@ -389,7 +389,7 @@ int find_history()
     return 0;
 }
 
-void add_history()
+void add_history(char data[100])
 {
     if(find_history() == 1) return;
     FILE *history_file = fopen(file_path, "a");
