@@ -25,7 +25,7 @@ int main()
         // recebe o input
         scanf(" %[^\n]", data);
         // adiciona ao histórico
-        add_history();
+        add_history(data);
         //  parseia o input
         parser(variables, data);
         // executa o input
