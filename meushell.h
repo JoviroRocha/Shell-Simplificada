@@ -29,7 +29,7 @@ void help()
     printf(COLOR_GREEN "BEM VINDO A CENTRAL DE AJUDA SHELL-SIMPLIFICADA\n");
     printf(COLOR_GREEN "\nCOMANDOS INTERNOS\n");
     printf(COLOR_GREEN " --VARIAVEIS AMBIENTE--\n");
-    printf(COLOR_BLUE "\n   - \"amb\" lista as todas as variaveis ambiente da Shell-Simplificada\n");
+    printf(COLOR_BLUE "\n   - \"amb\" lista todas as variaveis ambiente da Shell-Simplificada\n");
     printf(COLOR_BLUE "\n   - \"amb $VAR\" retorna o valor atual da VAR\n");
     printf(COLOR_BLUE "\n   - \"amb VAR=<valor>\" uma variavel ambiente recebera o valor digitado\n");
     printf(COLOR_BLUE "       - Observação: <valor> não pode ser separado por espaço, exemplos de uso: VAR=Ola-Mundo, VAR=Ola\n");
@@ -44,7 +44,6 @@ void help()
     printf(COLOR_GREEN "\nOUTRAS FUNCIONALIDADES\n");
     printf(COLOR_BLUE "\n   - Sempre que o usuario digitar um comando será armazenado em um historico.\n");
     printf(COLOR_BLUE "       - Observação: Se o usuario digitar seguidamente o mesmo comando, só sera armazenado uma vez.\n");
-    printf(COLOR_BLUE "\n   - Apos utilizar a SHELL-SIMPLIFICADA uma vez e ter comandos salvos no historico, \n     o usuario podera acessar esses comandos por meio do comando !<numero>.\n");
     printf(COLOR_BLUE "\n  - Existe a capacidade de executar comandos a partir de um arquivo fornecido como entrada, \n    Ou seja, ler comandos a partir de um arquivo e executá-los.\n");
     printf(COLOR_BLUE "       - Observação: Os comandos dentro do arquivo devem estar separados por um espaço.\n");
     printf(COLOR_BLUE "       - Observação 2: Na shell para rodar os comandos dentro do arquivo apenas digite ex: arquivo.cmds\n");
@@ -524,55 +523,3 @@ void exec_cmd_arq(char *variables2[])
     fclose(config_file);
 }
 
-void shell_functions(char data[100], char *variables[], char var_amb_arq[][256], char variables_amb[][256]){
-    //  parseia o input
-    parser(variables, data);
-    // executa o input
-    if (strcmp(variables[0], "cd") == 0)
-    {
-        cd(variables);
-        escreve();
-    }
-    else if(strstr(variables[0],".cmds")){
-        exec_cmd_arq(variables);
-    }
-    else if (strcmp(variables[0], "help") == 0)
-    {
-        help();
-    }
-    else if (strcmp(variables[0], "amb") == 0)
-    {
-        var_ambiente(variables, var_amb_arq, variables_amb);
-    }
-    else if (strcmp(variables[0], "clear") == 0)
-    {
-        clear();
-    }
-    else if (strcmp(variables[0], "history") == 0) 
-    {
-        print_history();
-    }
-    else if (strcmp(variables[0], "exit") == 0)
-    {
-        printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
-        exit(0);
-    }
-    else
-    {
-        int resp;
-        // Executar o comando
-        if (fork() == 0)
-        {
-            if (strcmp(variables[0], "hostname") == 0)
-            {
-                gethostname(HOST, sizeof(HOST));
-                escreve();
-            }
-            resp = execvp(path, variables);
-            if (resp == -1)
-                printf(COLOR_RED "ERROR: Command not found\n" COLOR_RESET);
-            exit(0);
-        }
-        wait(NULL);
-    }
-}
