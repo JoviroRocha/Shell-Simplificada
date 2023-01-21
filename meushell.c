@@ -31,7 +31,6 @@ int main()
         // executa o input
         if (strcmp(variables[0], "cd") == 0)
         {
-            
             cd(variables);
             escreve();
         }
