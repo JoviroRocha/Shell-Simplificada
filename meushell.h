@@ -456,7 +456,7 @@ void execute_history(char * variables[])
     }
      while( !feof(history_file) )
     {
-        fscanf(history_file, "%d %s\n", &file_position, line)
+        fscanf(history_file, "%d %s\n", &file_position, line);
         fgetc(history_file);
         printf("Hmm oi? %d %s\n", file_position, line);
         if(file_position == position)
