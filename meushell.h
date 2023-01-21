@@ -445,10 +445,9 @@ void execute_history(char * variables[])
     }
     variables[0][tamanho - 1] = '\0';
     int position = atoi(variables[0]);
-    printf("POSITION: %d\n", position);
+    int file_position;
     char *line;
     char *aux = variables[0];
-    int file_position;
     // See if the number is in the history
     FILE *history_file = fopen(file_path, "r");
     if(!history_file){
@@ -456,10 +455,12 @@ void execute_history(char * variables[])
         exit(0);
     }
      while(!feof(history_file)){
+        printf("Hmm oi?\n");
         fscanf(history_file, "%d %s", &file_position, line);
 
         if(file_position == position)
         {
+            printf("Deveria vazare\n");
             //main_function();
             return;
         }
