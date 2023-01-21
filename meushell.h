@@ -14,7 +14,6 @@ char *PRONTO;
 char PRONTO_REF[256];
 char DTA[256];
 char SHELL[30];
-char data[100];
 char data_save[100];
 char path[20];
 char file_path[256];
@@ -49,6 +48,9 @@ void help()
     printf(COLOR_BLUE "\n   - Apos utilizar a SHELL-SIMPLIFICADA uma vez e ter comandos salvos no historico, \n     o usuario podera acessar esses comandos por meio do comando !<numero>.\n");
     printf(COLOR_BLUE "\n  - Existe a capacidade de executar comandos a partir de um arquivo fornecido como entrada, \n    Ou seja, ler comandos a partir de um arquivo e executá-los.\n");
     printf(COLOR_BLUE "       - Observação: Os comandos dentro do arquivo devem estar separados por um espaço.\n");
+    printf(COLOR_BLUE "       - Observação 2: Na shell para rodar os comandos dentro do arquivo apenas digite ex: arquivo.cmds\n");
+    printf(COLOR_BLUE "--------------------------------------------------------------------------------\n");
+    printf(COLOR_BLUE "PRONTO exibira na shell-simplificada o valor de DTA, ate ser alterado para outro valor,\n    se for atribuido novamente PRONTO=DTA voltara a apontar para o diretorio atual\n");
 }
 
 void get_current_directory()
@@ -416,7 +418,7 @@ void print_history(){
     return;
 }
 
-void parser(char *variables[])
+void parser(char *variables[], char data[100])
 {
     char *token = strtok(data, " ");
     int loop = -1;
@@ -437,4 +439,88 @@ void reset_variables(char *variables[])
     {
         variables[i] = NULL;
     }
+}
+
+void exec_cmd_arq(char *variables2[])
+{
+    char var_amb_arq[2][256];
+    char variables_amb[2][256];
+
+    char *variables[1];
+    FILE *config_file = fopen(variables2[0], "rt");
+    if (!config_file)
+    {
+        printf("ERROR: The file \".cmds\" could not be found! \n");
+        exit(0);
+    }
+    int i = 1;
+    int loop = -1;
+    char *resultado;
+    while (!feof(config_file))
+    {
+        // Lê uma linha (inclusive com o '\n')
+        resultado = fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
+        if (resultado == NULL)
+            break;
+        // reseta as variáveis
+        reset_variables(variables);
+        // printa o PRONTO
+        printf(COLOR_BLUE "%s $" COLOR_RESET, PRONTO);
+        printf(" %s\n", Linha);
+        // recebe o input
+        // save history
+        //  parseia o input
+        Linha[strcspn(Linha, "\n")] = 0;
+        parser(variables, Linha);
+        // adiciona ao histórico
+        // executa o input
+        if (strcmp(variables[0], "cd") == 0)
+        {
+
+            cd(variables);
+            escreve();
+        }
+        else if (strcmp(variables[0], "ajuda") == 0)
+        {
+            help();
+        }
+        else if (strcmp(variables[0], "amb") == 0)
+        {
+
+            var_ambiente(variables, var_amb_arq, variables_amb);
+        }
+        else if (strcmp(variables[0], "clear") == 0)
+        {
+
+            clear();
+        }
+        else if (strcmp(variables[0], "exit") == 0)
+        {
+
+            printf(COLOR_GREEN "Shell is exiting...\n" COLOR_RESET);
+            exit(0);
+        }
+        else
+        {
+            int resp;
+            // Executar o comando
+            if (fork() == 0)
+            {
+                if (strcmp(variables[0], "hostname") == 0)
+                {
+                    gethostname(HOST, sizeof(HOST));
+                    escreve();
+                }
+                resp = execvp(path, variables);
+                if (resp == -1)
+                    printf(COLOR_RED "ERROR: Command not found\n" COLOR_RESET);
+                exit(0);
+            }
+            wait(NULL);
+        }
+
+        i++;
+    }
+
+    fclose(config_file);
 }
