@@ -409,10 +409,12 @@ void exec_cmd_arq(char *variables2[])
     }
     int i = 1;
     int loop = -1;
+    char *resultado;
     while (!feof(config_file))
     {
         // Lê uma linha (inclusive com o '\n')
-        fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
+        resultado=fgets(Linha, 99, config_file); // o 'fgets' lê até 99 caracteres ou até o '\n'
+        if(resultado==NULL) break;
         // reseta as variáveis
         reset_variables(variables);
         // printa o PRONTO
@@ -464,7 +466,7 @@ void exec_cmd_arq(char *variables2[])
                 resp = execvp(path, variables);
                 if (resp == -1)
                     printf(COLOR_RED "ERROR: Command not found\n" COLOR_RESET);
-                exit(0);
+                return 0;
             }
             wait(NULL);
         }
