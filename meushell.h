@@ -419,7 +419,7 @@ void exec_cmd_arq(char *variables2[])
         // reseta as variáveis
         reset_variables(variables);
         // printa o PRONTO
-        printf(COLOR_BLUE "%s $\n" COLOR_RESET, PRONTO);
+        printf(COLOR_BLUE "%s $" COLOR_RESET, PRONTO);
         printf(" %s\n", Linha);
         // recebe o input
         // save history
