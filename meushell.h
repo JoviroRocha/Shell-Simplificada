@@ -353,7 +353,12 @@ void var_ambiente(char *variables[], char var_amb_arq[][256], char variables_amb
 
     if (variables[1] == NULL)
     {
-        printf(COLOR_GREEN "Variaveis Ambientes do Shell: HOST, PRONTO, SHELL, DTA\n" COLOR_RESET);
+        printf(COLOR_GREEN "Shell Environment Variables: HOST, PRONTO, SHELL, DTA\n" COLOR_RESET);
+        return;
+    }
+    else if (strstr(variables[1], "=") != NULL && strstr(variables[1], "$") != NULL)
+    {
+        printf(COLOR_RED "ERROR: Invalid Format\n" COLOR_RESET);
         return;
     }
     else if (strstr(variables[1], "=") != NULL)
